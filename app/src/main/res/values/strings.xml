@@ -1,5 +1,8 @@
 <resources>
     <string name="app_name">HueLightAlarm</string>
-    <string name="tab_text_1">Tab 1</string>
-    <string name="tab_text_2">Tab 2</string>
+    <string name="tab_text_1">Alarms</string>
+    <string name="tab_text_2">Hue control</string>
+    <string name="app_title">Hue lights alarm</string>
+    <string name="tab_text_3">Settings</string>
+    <string name="add">Add</string>
 </resources>
