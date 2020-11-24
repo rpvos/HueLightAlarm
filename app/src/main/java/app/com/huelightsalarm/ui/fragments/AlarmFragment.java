@@ -12,12 +12,14 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import app.com.huelightsalarm.R;
+import app.com.huelightsalarm.ui.WeekModel;
 import app.com.huelightsalarm.ui.models.AlarmCardModel;
 import app.com.huelightsalarm.ui.models.TimeModel;
 
 public class AlarmFragment extends Fragment {
 
     private RecyclerView recyclerView;
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         //TODO alarm logic
@@ -41,7 +43,7 @@ public class AlarmFragment extends Fragment {
         AlarmCardAdapter adapter = new AlarmCardAdapter();
         this.recyclerView.setAdapter(adapter);
 
-        adapter.getAlarmCardModels().add(new AlarmCardModel(new TimeModel(12, 50), true));
+        adapter.getAlarmCardModels().add(new AlarmCardModel(new TimeModel(12, 50), true, new WeekModel()));
 
         adapter.notifyDataSetChanged();
     }

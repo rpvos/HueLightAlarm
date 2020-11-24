@@ -7,12 +7,12 @@ import app.com.huelightsalarm.ui.WeekModel;
 public class AlarmCardModel {
 
     private LocalDateTime alarmTime;
-    private WeekModel.WeekDays weekDays;
+    private WeekModel weekModel;
     private boolean activated;
 
-    public AlarmCardModel(LocalDateTime alarmTime, boolean activated, WeekModel.WeekDays weekDays) {
+    public AlarmCardModel(LocalDateTime alarmTime, boolean activated, WeekModel weekModel) {
         this.alarmTime = alarmTime;
         this.activated = activated;
-        this.weekDays = weekDays;
+        this.weekModel = weekModel;
     }
 }

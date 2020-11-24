@@ -1,26 +1,25 @@
 package app.com.huelightsalarm.ui.models;
 
-import app.com.huelightsalarm.ui.DaysOfWeek;
-import app.com.huelightsalarm.ui.models.TimeModel;
+import app.com.huelightsalarm.ui.WeekModel;
 
 public class AlarmCardModel {
 
     private TimeModel alarmTime;
-    private DaysOfWeek.WeekDays weekDays;
+    private WeekModel weekModel;
     private boolean activated;
 
-    public AlarmCardModel(TimeModel alarmTime, boolean activated/*, DaysOfWeek.WeekDays weekDays*/) {
+    public AlarmCardModel(TimeModel alarmTime, boolean activated, WeekModel weekModel) {
         this.alarmTime = alarmTime;
         this.activated = activated;
-        this.weekDays = weekDays;
+        this.weekModel = weekModel;
     }
 
     public TimeModel getAlarmTime() {
         return alarmTime;
     }
 
-    public DaysOfWeek.WeekDays getWeekDays() {
-        return weekDays;
+    public WeekModel getWeekModel() {
+        return weekModel;
     }
 
     public boolean isActivated() {
