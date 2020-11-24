@@ -10,6 +10,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.tabs.TabLayout;
 
+import androidx.fragment.app.FragmentManager;
 import androidx.viewpager.widget.ViewPager;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -18,6 +19,7 @@ import android.view.MenuItem;
 import android.view.View;
 
 import app.com.huelightsalarm.R;
+import app.com.huelightsalarm.ui.fragments.AddAlarmFragment;
 import app.com.huelightsalarm.ui.main.SectionsPagerAdapter;
 
 public class MainActivity extends AppCompatActivity {
@@ -37,11 +39,14 @@ public class MainActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                final Dialog fbDialogue = new Dialog(MainActivity.this, android.R.style.Theme_Black_NoTitleBar);
-                fbDialogue.getWindow().setBackgroundDrawable(new ColorDrawable(Color.argb(100, 0, 0, 0)));
-                fbDialogue.setContentView(R.layout.fragment_addalarm_popup);
-                fbDialogue.setCancelable(true);
-                fbDialogue.show();
+//                final Dialog fbDialogue = new Dialog(MainActivity.this, android.R.style.Widget);
+//                //fbDialogue.getWindow().setBackgroundDrawable(new ColorDrawable(Color.argb(100, 0, 0, 0)));
+//                fbDialogue.setContentView(R.layout.fragment_addalarm_popup);
+//                fbDialogue.setCancelable(true);
+//                fbDialogue.show();
+                FragmentManager fm = getSupportFragmentManager();
+                AddAlarmFragment addAlarmFragment = AddAlarmFragment.newInstance();
+                addAlarmFragment.show(fm, null);
             }
         });
     }

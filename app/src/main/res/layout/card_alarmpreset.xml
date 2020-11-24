@@ -1,14 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/CardView_Card"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:cardCornerRadius="4dp">
+        app:cardCornerRadius="8dp"
+        android:layout_margin="8dp"
+        android:elevation="8dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -20,8 +22,7 @@
                 android:layout_height="wrap_content"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                android:layout_marginEnd="14dp"
-                android:layout_marginTop="4dp"/>
+                android:layout_marginEnd="14dp" />
 
             <TextClock
                 android:id="@+id/DigitalClock_AlarmClock"
@@ -29,8 +30,7 @@
                 android:layout_height="wrap_content"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                android:layout_marginTop="6dp"
-                android:layout_marginStart="14dp"
+                android:layout_marginStart="6dp"
                 android:textSize="30sp"/>
 
             <com.google.android.material.button.MaterialButton
@@ -41,7 +41,7 @@
                 android:layout_height="40dp"
                 app:layout_constraintTop_toBottomOf="@+id/DigitalClock_AlarmClock"
                 app:layout_constraintStart_toStartOf="parent"
-                android:layout_marginStart="14dp" />
+                android:layout_marginStart="6dp" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/Button_Tuesday"

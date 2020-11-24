@@ -15,6 +15,12 @@
         <item name="backgroundTint">@color/Melon</item>
     </style>
 
+    <style name="TimePickerTheme" parent="Theme.AppCompat.Light.Dialog">
+        <item name="colorPrimary">@color/Apricot</item>
+        <item name="colorPrimaryDark">@color/Apricot</item>
+        <item name="colorAccent">@color/Apricot</item>
+    </style>
+
     <style name="MyFloatingActionButton" parent="@style/Widget.MaterialComponents.FloatingActionButton">
         <item name="materialThemeOverlay">@style/MyFabOverlay</item>
     </style>
