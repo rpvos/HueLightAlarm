@@ -2,16 +2,27 @@
     <!-- Base application theme. -->
     <style name="Theme.HueLightAlarm" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/purple_500</item>
-        <item name="colorPrimaryVariant">@color/purple_700</item>
-        <item name="colorOnPrimary">@color/white</item>
+        <item name="colorPrimary">@color/Melon</item>
+        <item name="colorPrimaryVariant">@color/Melon</item>
+        <item name="colorOnPrimary">@color/Old_Lavender</item>
         <!-- Secondary brand color. -->
-        <item name="colorSecondary">@color/teal_200</item>
-        <item name="colorSecondaryVariant">@color/teal_700</item>
+        <item name="colorSecondary">@color/Old_Lavender</item>
+        <item name="colorSecondaryVariant">@color/Apricot</item>
         <item name="colorOnSecondary">@color/black</item>
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
+        <item name="backgroundTint">@color/Melon</item>
+    </style>
+
+    <style name="MyFloatingActionButton" parent="@style/Widget.MaterialComponents.FloatingActionButton">
+        <item name="materialThemeOverlay">@style/MyFabOverlay</item>
+    </style>
+
+    <style name="MyFabOverlay">
+        <item name="colorSecondary">@color/Melon</item>
+        <!-- color used by the icon -->
+        <item name="colorOnSecondary">@color/white</item>
     </style>
 
     <style name="Theme.HueLightAlarm.NoActionBar">
