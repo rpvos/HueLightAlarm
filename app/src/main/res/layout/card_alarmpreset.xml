@@ -23,7 +23,7 @@
                 android:layout_marginEnd="14dp"
                 android:layout_marginTop="4dp"/>
 
-            <DigitalClock
+            <TextClock
                 android:id="@+id/DigitalClock_AlarmClock"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -42,6 +42,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/DigitalClock_AlarmClock"
                 app:layout_constraintStart_toStartOf="parent"
                 android:layout_marginStart="14dp" />
+
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/Button_Tuesday"
                 android:text="@string/tue"
@@ -51,6 +52,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/DigitalClock_AlarmClock"
                 app:layout_constraintStart_toEndOf="@id/Button_Monday"
                 android:layout_marginStart="8dp" />
+
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/Button_Wednesday"
                 android:text="@string/wed"
@@ -60,6 +62,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/DigitalClock_AlarmClock"
                 app:layout_constraintStart_toEndOf="@id/Button_Tuesday"
                 android:layout_marginStart="8dp" />
+
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/Button_Thursday"
                 android:text="@string/thu"
@@ -69,6 +72,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/DigitalClock_AlarmClock"
                 app:layout_constraintStart_toEndOf="@id/Button_Wednesday"
                 android:layout_marginStart="8dp" />
+
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/Button_Friday"
                 android:text="@string/fri"
@@ -78,6 +82,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/DigitalClock_AlarmClock"
                 app:layout_constraintStart_toEndOf="@id/Button_Thursday"
                 android:layout_marginStart="8dp" />
+
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/Button_Saturday"
                 android:text="@string/sat"
@@ -87,6 +92,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/DigitalClock_AlarmClock"
                 app:layout_constraintStart_toEndOf="@id/Button_Friday"
                 android:layout_marginStart="8dp" />
+
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/Button_Sunday"
                 android:text="@string/sun"
@@ -97,7 +103,6 @@
                 app:layout_constraintStart_toEndOf="@id/Button_Saturday"
                 android:layout_marginStart="8dp"
                 android:layout_marginEnd="16dp"/>
-
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
