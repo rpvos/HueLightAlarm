@@ -15,7 +15,7 @@ import app.com.huelightsalarm.views.fragments.AddAlarmFragment;
 import app.com.huelightsalarm.models.AlarmModel;
 import app.com.huelightsalarm.views.adapters.SectionsPagerAdapter;
 
-public class MainActivity extends AppCompatActivity implements OnAddingAlarm {
+public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,9 +41,4 @@ public class MainActivity extends AppCompatActivity implements OnAddingAlarm {
         });
     }
 
-    @Override
-    public void addAlarm(AlarmModel newAlarm) {
-        //todo add new alarm
-
-    }
 }

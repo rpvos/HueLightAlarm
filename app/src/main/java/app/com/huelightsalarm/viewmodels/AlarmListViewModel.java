@@ -8,11 +8,12 @@ import java.util.ArrayList;
 import app.com.huelightsalarm.AlarmListProvider;
 import app.com.huelightsalarm.DataSetChanged;
 import app.com.huelightsalarm.models.AlarmModel;
+import app.com.huelightsalarm.models.OnAddingAlarm;
 import app.com.huelightsalarm.models.TimeModel;
 import app.com.huelightsalarm.models.WeekModel;
 import app.com.huelightsalarm.views.adapters.AlarmCardAdapter;
 
-public class AlarmListViewModel extends ViewModel implements AlarmListProvider {
+public class AlarmListViewModel extends ViewModel implements AlarmListProvider, OnAddingAlarm {
 
     private ArrayList<AlarmViewModel> alarmArrayList;
     private ArrayList<DataSetChanged> subscribers;
