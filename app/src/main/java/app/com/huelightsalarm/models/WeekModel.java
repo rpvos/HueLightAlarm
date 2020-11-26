@@ -1,4 +1,4 @@
-package app.com.huelightsalarm.ui;
+package app.com.huelightsalarm.models;
 
 import java.util.EnumSet;
 

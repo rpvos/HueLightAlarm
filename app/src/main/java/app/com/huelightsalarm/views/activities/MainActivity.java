@@ -1,28 +1,19 @@
-package app.com.huelightsalarm.ui.main;
+package app.com.huelightsalarm.views.activities;
 
-import android.app.Dialog;
-import android.content.Context;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.tabs.TabLayout;
 
 import androidx.fragment.app.FragmentManager;
 import androidx.viewpager.widget.ViewPager;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.View;
-
 import app.com.huelightsalarm.R;
-import app.com.huelightsalarm.ui.OnAddingAlarm;
-import app.com.huelightsalarm.ui.fragments.AddAlarmFragment;
-import app.com.huelightsalarm.ui.fragments.AlarmCardModel;
-import app.com.huelightsalarm.ui.main.SectionsPagerAdapter;
+import app.com.huelightsalarm.models.OnAddingAlarm;
+import app.com.huelightsalarm.views.fragments.AddAlarmFragment;
+import app.com.huelightsalarm.models.AlarmCardModel;
+import app.com.huelightsalarm.views.adapters.SectionsPagerAdapter;
 
 public class MainActivity extends AppCompatActivity implements OnAddingAlarm {
 
@@ -53,5 +44,6 @@ public class MainActivity extends AppCompatActivity implements OnAddingAlarm {
     @Override
     public void addAlarm(AlarmCardModel newAlarm) {
         //todo add new alarm
+
     }
 }

@@ -1,4 +1,4 @@
-package app.com.huelightsalarm.ui.main;
+package app.com.huelightsalarm.views.adapters;
 
 import android.content.Context;
 
@@ -9,9 +9,9 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
 import app.com.huelightsalarm.R;
-import app.com.huelightsalarm.ui.fragments.AlarmFragment;
-import app.com.huelightsalarm.ui.fragments.HueControlFragment;
-import app.com.huelightsalarm.ui.fragments.SettingsFragment;
+import app.com.huelightsalarm.views.fragments.AlarmFragment;
+import app.com.huelightsalarm.views.fragments.HueControlFragment;
+import app.com.huelightsalarm.views.fragments.SettingsFragment;
 
 /**
  * A [FragmentPagerAdapter] that returns a fragment corresponding to
