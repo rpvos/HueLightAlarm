@@ -7,6 +7,8 @@ import android.widget.Button;
 import android.widget.TextClock;
 
 import androidx.annotation.NonNull;
+import androidx.lifecycle.ViewModel;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.switchmaterial.SwitchMaterial;
@@ -14,15 +16,19 @@ import com.google.android.material.switchmaterial.SwitchMaterial;
 import java.util.ArrayList;
 import java.util.List;
 
+import app.com.huelightsalarm.AlarmListProvider;
+import app.com.huelightsalarm.DataSetChanged;
 import app.com.huelightsalarm.R;
-import app.com.huelightsalarm.models.AlarmCardModel;
+import app.com.huelightsalarm.models.AlarmModel;
+import app.com.huelightsalarm.viewmodels.AlarmListViewModel;
+import app.com.huelightsalarm.viewmodels.AlarmViewModel;
 
-public class AlarmCardAdapter extends RecyclerView.Adapter<AlarmCardAdapter.CardHolder> {
+public class AlarmCardAdapter extends RecyclerView.Adapter<AlarmCardAdapter.CardHolder> implements DataSetChanged {
 
-    private List<AlarmCardModel> alarmCardModels;
+    private final AlarmListProvider listProvider;
 
-    public AlarmCardAdapter() {
-        this.alarmCardModels = new ArrayList<>();
+    public AlarmCardAdapter(AlarmListProvider listProvider) {
+        this.listProvider = listProvider;
     }
 
     @NonNull
@@ -36,22 +42,15 @@ public class AlarmCardAdapter extends RecyclerView.Adapter<AlarmCardAdapter.Card
 
     @Override
     public void onBindViewHolder(@NonNull CardHolder holder, int position) {
-        // Selected model based on position
-        AlarmCardModel model = this.alarmCardModels.get(position);
-
-        // Sets the ViewHolder to the right variables
-        holder.switchMaterial.setChecked(model.isActivated());
-        holder.textClock.setFormat24Hour(model.getAlarmTime().getHour() + ":" + model.getAlarmTime().getMinutes());
+        AlarmViewModel model = this.listProvider.getAlarmViewModelList().get(position);
+        model.fillCardHolder(holder);
     }
 
     @Override
     public int getItemCount() {
-        return alarmCardModels.size();
+        return this.listProvider.getAlarmViewModelList().size();
     }
 
-    public List<AlarmCardModel> getAlarmCardModels() {
-        return alarmCardModels;
-    }
 
     public class CardHolder extends RecyclerView.ViewHolder {
 
@@ -65,6 +64,14 @@ public class AlarmCardAdapter extends RecyclerView.Adapter<AlarmCardAdapter.Card
             this.textClock = itemView.findViewById(R.id.DigitalClock_AlarmClock);
             this.switchMaterial = itemView.findViewById(R.id.Switch_CardSwitch);
             this.monday = itemView.findViewById(R.id.Button_Monday);
+        }
+
+        public SwitchMaterial getSwitchMaterial() {
+            return switchMaterial;
+        }
+
+        public TextClock getTextClock() {
+            return textClock;
         }
     }
 }

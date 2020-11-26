@@ -11,12 +11,14 @@ import android.widget.TimePicker;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
+import androidx.lifecycle.ViewModelProvider;
 
 import app.com.huelightsalarm.R;
-import app.com.huelightsalarm.models.AlarmCardModel;
+import app.com.huelightsalarm.models.AlarmModel;
 import app.com.huelightsalarm.models.OnAddingAlarm;
 import app.com.huelightsalarm.models.WeekModel;
 import app.com.huelightsalarm.models.TimeModel;
+import app.com.huelightsalarm.viewmodels.AlarmListViewModel;
 
 public class AddAlarmFragment extends DialogFragment {
 
@@ -53,9 +55,11 @@ public class AddAlarmFragment extends DialogFragment {
         TimeModel alarmTime = new TimeModel(this.timePicker.getHour(), this.timePicker.getMinute());
         WeekModel weekModel = new WeekModel();
 
-        AlarmCardModel newAlarm = new AlarmCardModel(alarmTime, true, weekModel);
+        AlarmModel newAlarm = new AlarmModel(alarmTime, true, weekModel);
 
-        onAddingAlarmListener.addAlarm(newAlarm);
+        //todo viewmodel
+        AlarmListViewModel viewModel = new ViewModelProvider(this).get(AlarmListViewModel.class);
+        viewModel.addAlarm(newAlarm);
 
         //todo add nicer fix
         assert getFragmentManager() != null;

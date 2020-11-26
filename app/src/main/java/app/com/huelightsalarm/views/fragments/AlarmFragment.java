@@ -8,13 +8,15 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import app.com.huelightsalarm.R;
 import app.com.huelightsalarm.models.WeekModel;
-import app.com.huelightsalarm.models.AlarmCardModel;
+import app.com.huelightsalarm.models.AlarmModel;
 import app.com.huelightsalarm.models.TimeModel;
+import app.com.huelightsalarm.viewmodels.AlarmListViewModel;
 import app.com.huelightsalarm.views.adapters.AlarmCardAdapter;
 
 public class AlarmFragment extends Fragment {
@@ -39,15 +41,19 @@ public class AlarmFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        AlarmListViewModel viewModel = new ViewModelProvider(this).get(AlarmListViewModel.class);
+
         this.recyclerView = view.findViewById(R.id.RecyclerView_AlarmsList);
         this.recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
-        AlarmCardAdapter adapter = new AlarmCardAdapter();
+        AlarmCardAdapter adapter = new AlarmCardAdapter(viewModel);
         this.recyclerView.setAdapter(adapter);
 
-        adapter.getAlarmCardModels().add(new AlarmCardModel(new TimeModel(12, 50), true, new WeekModel()));
 
+        viewModel.subscribe(adapter);
         adapter.notifyDataSetChanged();
+
     }
+
 
     public static Fragment newInstance() {
         return new AlarmFragment();

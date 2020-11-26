@@ -12,7 +12,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import app.com.huelightsalarm.R;
 import app.com.huelightsalarm.models.OnAddingAlarm;
 import app.com.huelightsalarm.views.fragments.AddAlarmFragment;
-import app.com.huelightsalarm.models.AlarmCardModel;
+import app.com.huelightsalarm.models.AlarmModel;
 import app.com.huelightsalarm.views.adapters.SectionsPagerAdapter;
 
 public class MainActivity extends AppCompatActivity implements OnAddingAlarm {
@@ -42,7 +42,7 @@ public class MainActivity extends AppCompatActivity implements OnAddingAlarm {
     }
 
     @Override
-    public void addAlarm(AlarmCardModel newAlarm) {
+    public void addAlarm(AlarmModel newAlarm) {
         //todo add new alarm
 
     }

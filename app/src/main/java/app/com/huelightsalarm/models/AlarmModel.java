@@ -1,12 +1,12 @@
 package app.com.huelightsalarm.models;
 
-public class AlarmCardModel {
+public class AlarmModel {
 
     private TimeModel alarmTime;
     private WeekModel weekModel;
     private boolean activated;
 
-    public AlarmCardModel(TimeModel alarmTime, boolean activated, WeekModel weekModel) {
+    public AlarmModel(TimeModel alarmTime, boolean activated, WeekModel weekModel) {
         this.alarmTime = alarmTime;
         this.activated = activated;
         this.weekModel = weekModel;
