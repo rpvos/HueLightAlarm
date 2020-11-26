@@ -17,6 +17,7 @@
 
     <com.google.android.material.button.MaterialButton
         android:backgroundTint="@color/Apricot"
+        android:id="@+id/Button_AddAlarm"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent"

@@ -19,10 +19,12 @@ import android.view.MenuItem;
 import android.view.View;
 
 import app.com.huelightsalarm.R;
+import app.com.huelightsalarm.ui.OnAddingAlarm;
 import app.com.huelightsalarm.ui.fragments.AddAlarmFragment;
+import app.com.huelightsalarm.ui.fragments.AlarmCardModel;
 import app.com.huelightsalarm.ui.main.SectionsPagerAdapter;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements OnAddingAlarm {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,18 +38,20 @@ public class MainActivity extends AppCompatActivity {
 
         FloatingActionButton fab = findViewById(R.id.fab);
 
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+        fab.setOnClickListener(view -> {
 //                final Dialog fbDialogue = new Dialog(MainActivity.this, android.R.style.Widget);
 //                //fbDialogue.getWindow().setBackgroundDrawable(new ColorDrawable(Color.argb(100, 0, 0, 0)));
 //                fbDialogue.setContentView(R.layout.fragment_addalarm_popup);
 //                fbDialogue.setCancelable(true);
 //                fbDialogue.show();
-                FragmentManager fm = getSupportFragmentManager();
-                AddAlarmFragment addAlarmFragment = AddAlarmFragment.newInstance();
-                addAlarmFragment.show(fm, null);
-            }
+            FragmentManager fm = getSupportFragmentManager();
+            AddAlarmFragment addAlarmFragment = AddAlarmFragment.newInstance(this);
+            addAlarmFragment.show(fm, null);
         });
+    }
+
+    @Override
+    public void addAlarm(AlarmCardModel newAlarm) {
+        //todo add new alarm
     }
 }
