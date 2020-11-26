@@ -12,6 +12,30 @@ public class WeekModel {
     private boolean saturday;
     private boolean sunday;
 
+    public WeekModel() {
+        turnAllOff();
+    }
+
+    public void turnAllOn() {
+        this.monday = true;
+        this.tuesday = true;
+        this.wednesday = true;
+        this.thursday = true;
+        this.friday = true;
+        this.saturday = true;
+        this.sunday = true;
+    }
+
+    public void turnAllOff() {
+        this.monday = false;
+        this.tuesday = false;
+        this.wednesday = false;
+        this.thursday = false;
+        this.friday = false;
+        this.saturday = false;
+        this.sunday = false;
+    }
+
     public boolean isMonday() {
         return monday;
     }
