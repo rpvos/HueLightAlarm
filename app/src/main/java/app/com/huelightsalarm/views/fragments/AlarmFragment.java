@@ -8,9 +8,12 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import app.com.huelightsalarm.R;
 import app.com.huelightsalarm.viewmodels.AlarmListViewModel;
@@ -21,8 +24,7 @@ public class AlarmFragment extends Fragment {
     private AlarmListViewModel viewModel;
     private RecyclerView recyclerView;
 
-    public AlarmFragment(AlarmListViewModel viewModel) {
-        this.viewModel = viewModel;
+    public AlarmFragment() {
     }
 
     @Override
@@ -42,7 +44,7 @@ public class AlarmFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
+        this.viewModel = new ViewModelProvider(this).get(AlarmListViewModel.class);
         this.recyclerView = view.findViewById(R.id.RecyclerView_AlarmsList);
         this.recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
         AlarmCardAdapter adapter = new AlarmCardAdapter(viewModel);
@@ -51,10 +53,18 @@ public class AlarmFragment extends Fragment {
 
         viewModel.subscribe(adapter);
         adapter.notifyDataSetChanged();
+
+        FloatingActionButton fab = view.findViewById(R.id.fab);
+
+        fab.setOnClickListener(v -> {
+            FragmentManager fm = getFragmentManager();
+            AddAlarmFragment addAlarmFragment = AddAlarmFragment.newInstance(viewModel);
+            addAlarmFragment.show(fm, null);
+        });
     }
 
 
-    public static Fragment newInstance(AlarmListViewModel alarmViewModel) {
-        return new AlarmFragment(alarmViewModel);
+    public static Fragment newInstance() {
+        return new AlarmFragment();
     }
 }

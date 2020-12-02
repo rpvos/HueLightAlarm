@@ -24,13 +24,11 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
 
     @StringRes
     private static final int[] TAB_TITLES = new int[]{R.string.tab_text_1, R.string.tab_text_2, R.string.tab_text_3};
-    private AlarmListViewModel alarmViewModel;
     private final Context mContext;
 
-    public SectionsPagerAdapter(Context context, FragmentManager fm, AlarmListViewModel viewModel) {
+    public SectionsPagerAdapter(Context context, FragmentManager fm) {
         super(fm);
         mContext = context;
-        this.alarmViewModel = viewModel;
     }
 
     @NotNull
@@ -40,13 +38,13 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
         // Return a PlaceholderFragment (defined as a static inner class below).
         switch (position){
             case 0:
-                return AlarmFragment.newInstance(alarmViewModel);
+                return AlarmFragment.newInstance();
             case 1:
                 return HueControlFragment.newInstance();
             case 2:
                 return SettingsFragment.newInstance();
         }
-        return AlarmFragment.newInstance(alarmViewModel);
+        return AlarmFragment.newInstance();
     }
 
     @Nullable
