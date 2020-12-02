@@ -12,6 +12,10 @@ public class AlarmModel {
         this.weekModel = weekModel;
     }
 
+    public void setActivated(boolean activated) {
+        this.activated = activated;
+    }
+
     public TimeModel getAlarmTime() {
         return alarmTime;
     }

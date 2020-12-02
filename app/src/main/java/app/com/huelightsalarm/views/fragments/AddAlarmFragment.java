@@ -51,18 +51,13 @@ public class AddAlarmFragment extends DialogFragment {
     }
 
     private void addAlarm() {
-
-        TimeModel alarmTime = new TimeModel(this.timePicker.getHour(), this.timePicker.getMinute());
-        WeekModel weekModel = new WeekModel();
-
-        AlarmModel newAlarm = new AlarmModel(alarmTime, true, weekModel);
-
-        onAddingAlarmListener.addAlarm(newAlarm);
+        // pass time
+        onAddingAlarmListener.addAlarm(timePicker.getHour(),timePicker.getMinute());
 
 //        //todo viewmodel
 //        AlarmListViewModel viewModel = new ViewModelProvider(this).get(AlarmListViewModel.class);
 //        viewModel.addAlarm(newAlarm);
-//
+
         //todo add nicer fix
         assert getFragmentManager() != null;
         getFragmentManager().beginTransaction().remove(this).commit();

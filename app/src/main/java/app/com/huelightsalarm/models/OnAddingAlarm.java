@@ -1,5 +1,5 @@
 package app.com.huelightsalarm.models;
 
 public interface OnAddingAlarm {
-    void addAlarm(AlarmModel newAlarm);
+    void addAlarm(int hours,int minutes);
 }

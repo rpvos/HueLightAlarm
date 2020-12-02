@@ -4,14 +4,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.TextClock;
+import android.widget.Switch;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.lifecycle.ViewModel;
-import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.RecyclerView;
-
-import com.google.android.material.switchmaterial.SwitchMaterial;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,8 +16,6 @@ import java.util.List;
 import app.com.huelightsalarm.AlarmListProvider;
 import app.com.huelightsalarm.DataSetChanged;
 import app.com.huelightsalarm.R;
-import app.com.huelightsalarm.models.AlarmModel;
-import app.com.huelightsalarm.viewmodels.AlarmListViewModel;
 import app.com.huelightsalarm.viewmodels.AlarmViewModel;
 
 public class AlarmCardAdapter extends RecyclerView.Adapter<AlarmCardAdapter.CardHolder> implements DataSetChanged {
@@ -54,16 +49,16 @@ public class AlarmCardAdapter extends RecyclerView.Adapter<AlarmCardAdapter.Card
 
     public static class CardHolder extends RecyclerView.ViewHolder {
 
-        private final TextClock textClock;
-        private final SwitchMaterial switchMaterial;
+        private final TextView clockTextView;
+        private final Switch alarmSwitch;
         //TODO week buttons
         private final List<Button> buttons ;
 
         public CardHolder(@NonNull View itemView) {
             super(itemView);
 
-            this.textClock = itemView.findViewById(R.id.DigitalClock_AlarmClock);
-            this.switchMaterial = itemView.findViewById(R.id.Switch_CardSwitch);
+            this.clockTextView = itemView.findViewById(R.id.DigitalClock_AlarmClock);
+            this.alarmSwitch = itemView.findViewById(R.id.Switch_CardSwitch);
             this.buttons= new ArrayList<>();
             this.buttons.add(itemView.findViewById(R.id.Button_Monday));
             this.buttons.add(itemView.findViewById(R.id.Button_Tuesday));
@@ -80,12 +75,12 @@ public class AlarmCardAdapter extends RecyclerView.Adapter<AlarmCardAdapter.Card
 
         }
 
-        public SwitchMaterial getSwitchMaterial() {
-            return switchMaterial;
+        public Switch getAlarmSwitch() {
+            return alarmSwitch;
         }
 
-        public TextClock getTextClock() {
-            return textClock;
+        public TextView getClockTextView() {
+            return clockTextView;
         }
     }
 }

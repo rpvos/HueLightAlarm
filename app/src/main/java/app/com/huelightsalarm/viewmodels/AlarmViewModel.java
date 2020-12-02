@@ -1,23 +1,37 @@
 package app.com.huelightsalarm.viewmodels;
 
+import android.annotation.SuppressLint;
+import android.view.View;
+import android.widget.Switch;
+
 import app.com.huelightsalarm.models.AlarmModel;
-import app.com.huelightsalarm.models.TimeModel;
 import app.com.huelightsalarm.views.adapters.AlarmCardAdapter;
 
-public class AlarmViewModel {
-
+public class AlarmViewModel implements View.OnClickListener {
     private final AlarmModel alarmModel;
 
     public AlarmViewModel(AlarmModel alarmModel) {
         this.alarmModel = alarmModel;
     }
 
+    @SuppressLint("SetTextI18n")
     public void fillCardHolder(AlarmCardAdapter.CardHolder holder) {
-        holder.getSwitchMaterial().setChecked(alarmModel.isActivated());
-        if(alarmModel.getAlarmTime().getMinutes() > 9){
-            holder.getTextClock().setFormat24Hour(alarmModel.getAlarmTime().getHour() + ":" + alarmModel.getAlarmTime().getMinutes());
+        holder.getAlarmSwitch().setChecked(alarmModel.isActivated());
+
+        holder.getAlarmSwitch().setOnClickListener(this);
+
+        // todo add 12 hour support
+        if (alarmModel.getAlarmTime().getMinutes() > 9) {
+            holder.getClockTextView().setText(alarmModel.getAlarmTime().getHour() + ":" + alarmModel.getAlarmTime().getMinutes());
         } else {
-            holder.getTextClock().setFormat24Hour(alarmModel.getAlarmTime().getHour() + ":" + "0" + alarmModel.getAlarmTime().getMinutes());
+            holder.getClockTextView().setText(alarmModel.getAlarmTime().getHour() + ":" + "0" + alarmModel.getAlarmTime().getMinutes());
         }
+    }
+
+
+    @Override
+    public void onClick(View view) {
+        boolean isActivated = ((Switch) view).isChecked();
+        alarmModel.setActivated(isActivated);
     }
 }

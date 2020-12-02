@@ -10,13 +10,20 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import app.com.huelightsalarm.R;
+import app.com.huelightsalarm.viewmodels.HueControlViewModel;
+import app.com.huelightsalarm.viewmodels.SharedViewModel;
 
 public class HueControlFragment extends Fragment {
 
+    public HueControlFragment(HueControlViewModel hueControlViewModel) {
+
+    }
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
-        //TODO hue control logic
         super.onCreate(savedInstanceState);
+
+
     }
 
     @Nullable
@@ -26,7 +33,7 @@ public class HueControlFragment extends Fragment {
         return inflater.inflate(R.layout.fragment_huecontrol, container, false);
     }
 
-    public static Fragment newInstance() {
-        return new HueControlFragment();
+    public static Fragment newInstance(HueControlViewModel sharedViewModel) {
+        return new HueControlFragment(sharedViewModel);
     }
 }

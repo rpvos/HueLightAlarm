@@ -17,6 +17,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import app.com.huelightsalarm.R;
 import app.com.huelightsalarm.viewmodels.AlarmListViewModel;
+import app.com.huelightsalarm.viewmodels.SharedViewModel;
 import app.com.huelightsalarm.views.adapters.AlarmCardAdapter;
 
 public class AlarmFragment extends Fragment {
@@ -64,7 +65,7 @@ public class AlarmFragment extends Fragment {
     }
 
 
-    public static Fragment newInstance() {
+    public static Fragment newInstance(SharedViewModel sharedViewModel) {
         return new AlarmFragment();
     }
 }

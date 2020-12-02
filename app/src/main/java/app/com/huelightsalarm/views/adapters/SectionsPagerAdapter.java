@@ -11,7 +11,7 @@ import androidx.fragment.app.FragmentPagerAdapter;
 import org.jetbrains.annotations.NotNull;
 
 import app.com.huelightsalarm.R;
-import app.com.huelightsalarm.viewmodels.AlarmListViewModel;
+import app.com.huelightsalarm.viewmodels.SharedViewModel;
 import app.com.huelightsalarm.views.fragments.AlarmFragment;
 import app.com.huelightsalarm.views.fragments.HueControlFragment;
 import app.com.huelightsalarm.views.fragments.SettingsFragment;
@@ -25,10 +25,12 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
     @StringRes
     private static final int[] TAB_TITLES = new int[]{R.string.tab_text_1, R.string.tab_text_2, R.string.tab_text_3};
     private final Context mContext;
+    private final SharedViewModel sharedViewModel;
 
-    public SectionsPagerAdapter(Context context, FragmentManager fm) {
+    public SectionsPagerAdapter(Context context, FragmentManager fm, SharedViewModel viewModel) {
         super(fm);
         mContext = context;
+        this.sharedViewModel = viewModel;
     }
 
     @NotNull
@@ -38,13 +40,13 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
         // Return a PlaceholderFragment (defined as a static inner class below).
         switch (position){
             case 0:
-                return AlarmFragment.newInstance();
+                return AlarmFragment.newInstance(sharedViewModel);
             case 1:
-                return HueControlFragment.newInstance();
+                return HueControlFragment.newInstance(sharedViewModel.getHueControlViewModel());
             case 2:
                 return SettingsFragment.newInstance();
         }
-        return AlarmFragment.newInstance();
+        return AlarmFragment.newInstance(sharedViewModel);
     }
 
     @Nullable
