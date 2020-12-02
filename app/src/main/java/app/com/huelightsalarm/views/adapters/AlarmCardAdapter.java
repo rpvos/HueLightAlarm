@@ -52,18 +52,32 @@ public class AlarmCardAdapter extends RecyclerView.Adapter<AlarmCardAdapter.Card
     }
 
 
-    public class CardHolder extends RecyclerView.ViewHolder {
+    public static class CardHolder extends RecyclerView.ViewHolder {
 
-        private TextClock textClock;
-        private SwitchMaterial switchMaterial;
+        private final TextClock textClock;
+        private final SwitchMaterial switchMaterial;
         //TODO week buttons
-        private Button monday;
+        private final List<Button> buttons ;
 
         public CardHolder(@NonNull View itemView) {
             super(itemView);
+
             this.textClock = itemView.findViewById(R.id.DigitalClock_AlarmClock);
             this.switchMaterial = itemView.findViewById(R.id.Switch_CardSwitch);
-            this.monday = itemView.findViewById(R.id.Button_Monday);
+            this.buttons= new ArrayList<>();
+            this.buttons.add(itemView.findViewById(R.id.Button_Monday));
+            this.buttons.add(itemView.findViewById(R.id.Button_Tuesday));
+            this.buttons.add(itemView.findViewById(R.id.Button_Wednesday));
+            this.buttons.add(itemView.findViewById(R.id.Button_Thursday));
+            this.buttons.add(itemView.findViewById(R.id.Button_Friday));
+            this.buttons.add(itemView.findViewById(R.id.Button_Saturday));
+            this.buttons.add(itemView.findViewById(R.id.Button_Sunday));
+
+            for(Button button : buttons){
+                button.setBackgroundColor(itemView.getResources().getColor(R.color.Old_Lavender));
+                button.setTextColor(itemView.getResources().getColor(R.color.white));
+            }
+
         }
 
         public SwitchMaterial getSwitchMaterial() {

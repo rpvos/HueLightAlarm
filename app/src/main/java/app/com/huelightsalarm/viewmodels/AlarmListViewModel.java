@@ -15,8 +15,8 @@ import app.com.huelightsalarm.views.adapters.AlarmCardAdapter;
 
 public class AlarmListViewModel extends ViewModel implements AlarmListProvider, OnAddingAlarm {
 
-    private ArrayList<AlarmViewModel> alarmArrayList;
-    private ArrayList<DataSetChanged> subscribers;
+    private final ArrayList<AlarmViewModel> alarmArrayList;
+    private final ArrayList<DataSetChanged> subscribers;
 
     public AlarmListViewModel() {
         this.alarmArrayList = new ArrayList<>();

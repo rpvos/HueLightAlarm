@@ -2,8 +2,8 @@ package app.com.huelightsalarm.models;
 
 public class TimeModel {
 
-    private int hour;
-    private int minutes;
+    private final int hour;
+    private final int minutes;
 
     public TimeModel(int hour, int minutes) {
         this.hour = hour;

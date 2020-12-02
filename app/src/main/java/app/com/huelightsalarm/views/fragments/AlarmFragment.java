@@ -13,15 +13,17 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import app.com.huelightsalarm.R;
-import app.com.huelightsalarm.models.WeekModel;
-import app.com.huelightsalarm.models.AlarmModel;
-import app.com.huelightsalarm.models.TimeModel;
 import app.com.huelightsalarm.viewmodels.AlarmListViewModel;
 import app.com.huelightsalarm.views.adapters.AlarmCardAdapter;
 
 public class AlarmFragment extends Fragment {
 
+    private AlarmListViewModel viewModel;
     private RecyclerView recyclerView;
+
+    public AlarmFragment(AlarmListViewModel viewModel) {
+        this.viewModel = viewModel;
+    }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -41,8 +43,6 @@ public class AlarmFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        AlarmListViewModel viewModel = new ViewModelProvider(this).get(AlarmListViewModel.class);
-
         this.recyclerView = view.findViewById(R.id.RecyclerView_AlarmsList);
         this.recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
         AlarmCardAdapter adapter = new AlarmCardAdapter(viewModel);
@@ -51,11 +51,10 @@ public class AlarmFragment extends Fragment {
 
         viewModel.subscribe(adapter);
         adapter.notifyDataSetChanged();
-
     }
 
 
-    public static Fragment newInstance() {
-        return new AlarmFragment();
+    public static Fragment newInstance(AlarmListViewModel alarmViewModel) {
+        return new AlarmFragment(alarmViewModel);
     }
 }
