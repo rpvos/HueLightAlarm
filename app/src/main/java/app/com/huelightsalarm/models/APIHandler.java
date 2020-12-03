@@ -1,11 +1,6 @@
 package app.com.huelightsalarm.models;
 
-import android.util.Log;
-
 import com.google.gson.Gson;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -34,22 +29,21 @@ public class APIHandler {
 
         Call call = client.newCall(request);
 
+
         call.enqueue(new Callback() {
-
             @Override
-            public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
-
-                if (response.isSuccessful()) {
-                    String data = response.body().string();
-                    Log.d("Response successful", data);
-                    //todo return data
-                }
+            public void onFailure(@NotNull Call call, @NotNull IOException e) {
 
             }
 
             @Override
-            public void onFailure(@NotNull Call call, @NotNull IOException e) {
+            public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
 
+                if (response.isSuccessful())
+                {
+                    String data = response.body().string();
+                    //todo return data
+                }
             }
         });
 
