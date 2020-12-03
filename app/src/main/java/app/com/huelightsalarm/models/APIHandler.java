@@ -1,6 +1,5 @@
 package app.com.huelightsalarm.models;
 
-import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
@@ -8,7 +7,6 @@ import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Base64;
 import java.util.List;
 
 import app.com.huelightsalarm.interfaces.HueLightListCallBack;
@@ -22,7 +20,7 @@ import okhttp3.RequestBody;
 import okhttp3.Response;
 
 public class APIHandler {
-    private final String BASEURL = "http://10.0.2.2:8000/api/newdeveloper/";
+    private final String BASE_URL = "http://10.0.2.2:8000/api/newdeveloper/";
 
     private OkHttpClient client;
 
@@ -33,7 +31,7 @@ public class APIHandler {
 
     public void getLamps(HueLightListCallBack callBack) {
         Request request = new Request.Builder()
-                .url(BASEURL + "lights")
+                .url(BASE_URL + "lights")
                 .build();
 
         Call call = client.newCall(request);
@@ -73,7 +71,7 @@ public class APIHandler {
         RequestBody body = RequestBody.create(json,MediaType.get("application/json; charset=utf-8"));
 
         Request request = new Request.Builder()
-                .url(BASEURL +"lights/"+id+"/state")
+                .url(BASE_URL +"lights/"+id+"/state")
                 .put(body)
                 .build();
 
