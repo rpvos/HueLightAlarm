@@ -18,11 +18,15 @@ public class Light {
     public Light(JsonObject data) {
         this.modelID = data.get("modelid").getAsString();
         this.name = data.get("name").getAsString();
-        this.saturation = data.get("sat").getAsInt();
-        this.isOn = data.get("on").getAsBoolean();
-        this.brightness = data.get("bri").getAsInt();
-        this.hue = data.get("hue").getAsInt();
-        this.colormode = ColorMode.valueOf(data.get("colormode").getAsString());
+        JsonObject state = data.getAsJsonObject("state");
+        this.brightness = state.get("bri").getAsInt();
+        this.isOn = state.get("on").getAsBoolean();
+
+        if (modelID.contains("LCT")) {
+            this.saturation = state.get("sat").getAsInt();
+            this.hue = state.get("hue").getAsInt();
+            this.colormode = ColorMode.valueOf(state.get("colormode").getAsString());
+        }
     }
 
     public boolean isActivated() {

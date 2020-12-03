@@ -11,14 +11,9 @@ import android.widget.TimePicker;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
-import androidx.lifecycle.ViewModelProvider;
 
 import app.com.huelightsalarm.R;
-import app.com.huelightsalarm.models.AlarmModel;
-import app.com.huelightsalarm.models.OnAddingAlarm;
-import app.com.huelightsalarm.models.WeekModel;
-import app.com.huelightsalarm.models.TimeModel;
-import app.com.huelightsalarm.viewmodels.AlarmListViewModel;
+import app.com.huelightsalarm.interfaces.OnAddingAlarm;
 
 public class AddAlarmFragment extends DialogFragment {
 

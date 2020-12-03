@@ -1,17 +1,15 @@
 package app.com.huelightsalarm.viewmodels;
 
-import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import java.util.ArrayList;
 
-import app.com.huelightsalarm.AlarmListProvider;
-import app.com.huelightsalarm.DataSetChanged;
-import app.com.huelightsalarm.models.AlarmModel;
-import app.com.huelightsalarm.models.OnAddingAlarm;
-import app.com.huelightsalarm.models.TimeModel;
-import app.com.huelightsalarm.models.WeekModel;
-import app.com.huelightsalarm.views.adapters.AlarmCardAdapter;
+import app.com.huelightsalarm.interfaces.AlarmListProvider;
+import app.com.huelightsalarm.interfaces.DataSetChanged;
+import app.com.huelightsalarm.models.data.AlarmModel;
+import app.com.huelightsalarm.interfaces.OnAddingAlarm;
+import app.com.huelightsalarm.models.data.TimeModel;
+import app.com.huelightsalarm.models.data.WeekModel;
 
 public class AlarmListViewModel extends ViewModel implements AlarmListProvider, OnAddingAlarm {
 

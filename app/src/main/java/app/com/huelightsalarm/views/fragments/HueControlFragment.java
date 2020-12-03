@@ -49,6 +49,8 @@ public class HueControlFragment extends Fragment {
         this.recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
         HueLightCardAdapter adapter = new HueLightCardAdapter(hueControlViewModel);
         this.recyclerView.setAdapter(adapter);
+
+        hueControlViewModel.addListener(adapter);
     }
 
     public static Fragment newInstance(HueControlViewModel sharedViewModel) {
