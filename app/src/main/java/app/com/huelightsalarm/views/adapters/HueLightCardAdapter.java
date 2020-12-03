@@ -8,6 +8,7 @@ import android.widget.Switch;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
@@ -21,9 +22,11 @@ import app.com.huelightsalarm.viewmodels.HueLightViewModel;
 public class HueLightCardAdapter extends RecyclerView.Adapter<HueLightCardAdapter.CardHolder> {
 
     private HueLightsListProvider listProvider;
+    private View.OnClickListener onClickListener;
 
-    public HueLightCardAdapter(HueLightsListProvider listProvider) {
+    public HueLightCardAdapter(HueLightsListProvider listProvider, View.OnClickListener onClickListener) {
         this.listProvider = listProvider;
+        this.onClickListener = onClickListener;
     }
 
     @NonNull
@@ -39,6 +42,7 @@ public class HueLightCardAdapter extends RecyclerView.Adapter<HueLightCardAdapte
     public void onBindViewHolder(@NonNull CardHolder holder, int position) {
         HueLightViewModel model = this.listProvider.getHueLightViewModelList().get(position);
         model.fillCardHolder(holder);
+        holder.subscribeToOnClick(onClickListener);
     }
 
     @Override
@@ -50,13 +54,18 @@ public class HueLightCardAdapter extends RecyclerView.Adapter<HueLightCardAdapte
 
         private final TextView lightName;
         private final Switch hueLightSwitch;
+        private final CardView cardView;
 
         public CardHolder(@NonNull View itemView) {
             super(itemView);
 
             this.lightName = itemView.findViewById(R.id.TextView_HueLight);
             this.hueLightSwitch = itemView.findViewById(R.id.Switch_HueLight);
+            this.cardView = itemView.findViewById(R.id.CardView_HueLamp);
+        }
 
+        public void subscribeToOnClick(View.OnClickListener onClickListener){
+            this.cardView.setOnClickListener(onClickListener);
         }
 
         public TextView getLightName() {

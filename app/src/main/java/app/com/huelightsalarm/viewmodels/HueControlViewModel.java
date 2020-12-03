@@ -1,5 +1,7 @@
 package app.com.huelightsalarm.viewmodels;
 
+import android.view.View;
+
 import java.util.ArrayList;
 
 import app.com.huelightsalarm.HueLightsListProvider;

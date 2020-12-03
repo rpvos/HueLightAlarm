@@ -7,7 +7,9 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -20,7 +22,7 @@ import app.com.huelightsalarm.viewmodels.SharedViewModel;
 import app.com.huelightsalarm.views.adapters.AlarmCardAdapter;
 import app.com.huelightsalarm.views.adapters.HueLightCardAdapter;
 
-public class HueControlFragment extends Fragment {
+public class HueControlFragment extends Fragment implements View.OnClickListener {
     private HueControlViewModel hueControlViewModel;
     private RecyclerView recyclerView;
 
@@ -47,11 +49,19 @@ public class HueControlFragment extends Fragment {
 
         this.recyclerView = view.findViewById(R.id.RecyclerView_HueLights);
         this.recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
-        HueLightCardAdapter adapter = new HueLightCardAdapter(hueControlViewModel);
+        HueLightCardAdapter adapter = new HueLightCardAdapter(hueControlViewModel, this);
+
         this.recyclerView.setAdapter(adapter);
     }
 
     public static Fragment newInstance(HueControlViewModel sharedViewModel) {
         return new HueControlFragment(sharedViewModel);
+    }
+
+    @Override
+    public void onClick(View v) {
+        FragmentManager fm = getFragmentManager();
+        DialogFragment colorPickerFragment = ColorPickerFragment.newInstance();
+        colorPickerFragment.show(fm, null);
     }
 }
