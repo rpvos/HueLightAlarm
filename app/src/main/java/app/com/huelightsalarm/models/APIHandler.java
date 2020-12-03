@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import app.com.huelightsalarm.interfaces.DataSetChanged;
 import app.com.huelightsalarm.interfaces.HueLightListCallBack;
 import app.com.huelightsalarm.models.data.Light;
 import okhttp3.Call;
@@ -23,9 +24,12 @@ public class APIHandler {
     private final String BASE_URL = "http://10.0.2.2:8000/api/newdeveloper/";
 
     private OkHttpClient client;
+    private List<DataSetChanged> listeners;
+
 
     public APIHandler() {
         this.client = new OkHttpClient();
+        this.listeners = new ArrayList<>();
     }
 
 
@@ -55,6 +59,7 @@ public class APIHandler {
                     }
 
                     callBack.setLights(list);
+                    notifyDataSetChanged();
                 }
             }
         });
@@ -68,10 +73,10 @@ public class APIHandler {
                 "    \"sat\": " + saturation + "\n" +
                 "}";
 
-        RequestBody body = RequestBody.create(json,MediaType.get("application/json; charset=utf-8"));
+        RequestBody body = RequestBody.create(json, MediaType.get("application/json; charset=utf-8"));
 
         Request request = new Request.Builder()
-                .url(BASE_URL +"lights/"+id+"/state")
+                .url(BASE_URL + "lights/" + id + "/state")
                 .put(body)
                 .build();
 
@@ -86,8 +91,48 @@ public class APIHandler {
 
             @Override
             public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
-
+                if (response.isSuccessful())
+                    notifyDataSetChanged();
             }
         });
+    }
+
+    public void setLightState(int id, boolean isOn) {
+        String json = "{\n" +
+                "    \"on\": "+isOn+",\n" +
+                "}";
+
+        RequestBody body = RequestBody.create(json, MediaType.get("application/json; charset=utf-8"));
+
+        Request request = new Request.Builder()
+                .url(BASE_URL + "lights/" + id + "/state")
+                .put(body)
+                .build();
+
+        Call call = client.newCall(request);
+
+
+        call.enqueue(new Callback() {
+            @Override
+            public void onFailure(@NotNull Call call, @NotNull IOException e) {
+
+            }
+
+            @Override
+            public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
+                if (response.isSuccessful())
+                    notifyDataSetChanged();
+            }
+        });
+    }
+
+    public void notifyDataSetChanged() {
+        for (DataSetChanged listener : listeners) {
+            listener.notifyDataSetChanged();
+        }
+    }
+
+    public void addListener(DataSetChanged listener) {
+        listeners.add(listener);
     }
 }

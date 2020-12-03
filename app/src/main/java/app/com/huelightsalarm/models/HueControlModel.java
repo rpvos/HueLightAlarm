@@ -7,7 +7,7 @@ import app.com.huelightsalarm.interfaces.DataSetChanged;
 import app.com.huelightsalarm.interfaces.HueLightListCallBack;
 import app.com.huelightsalarm.models.data.Light;
 
-public class HueControlModel implements HueLightListCallBack {
+public class HueControlModel implements HueLightListCallBack, DataSetChanged {
     private APIHandler handler;
     private List<Light> lights;
     private ArrayList<DataSetChanged> listeners;
@@ -16,6 +16,8 @@ public class HueControlModel implements HueLightListCallBack {
         this.handler = new APIHandler();
         this.lights = new ArrayList<>();
         this.listeners = new ArrayList<>();
+
+        this.handler.addListener(this);
         handler.getLamps(this);
     }
 
@@ -31,10 +33,9 @@ public class HueControlModel implements HueLightListCallBack {
     @Override
     public void setLights(List<Light> lights) {
         this.lights = lights;
-        notifyDataSetChanged();
     }
 
-    private void notifyDataSetChanged() {
+    public void notifyDataSetChanged() {
         for (DataSetChanged listener : listeners) {
             listener.notifyDataSetChanged();
         }
