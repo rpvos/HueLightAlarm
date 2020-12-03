@@ -5,6 +5,7 @@ import java.util.List;
 
 import app.com.huelightsalarm.interfaces.DataSetChanged;
 import app.com.huelightsalarm.interfaces.HueLightListCallBack;
+import app.com.huelightsalarm.interfaces.LightsModifier;
 import app.com.huelightsalarm.models.data.Light;
 
 public class HueControlModel implements HueLightListCallBack, DataSetChanged {
@@ -13,12 +14,12 @@ public class HueControlModel implements HueLightListCallBack, DataSetChanged {
     private ArrayList<DataSetChanged> listeners;
 
     public HueControlModel() {
-        this.handler = new APIHandler();
+        this.handler = new APIHandler(this);
         this.lights = new ArrayList<>();
         this.listeners = new ArrayList<>();
 
         this.handler.addListener(this);
-        handler.getLamps(this);
+        handler.getLights();
     }
 
     public HueControlModel(DataSetChanged listener) {
@@ -41,6 +42,8 @@ public class HueControlModel implements HueLightListCallBack, DataSetChanged {
         }
     }
 
-
+    public LightsModifier getAPIHandler() {
+        return handler;
+    }
 }
 

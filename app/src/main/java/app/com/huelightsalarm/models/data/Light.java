@@ -5,6 +5,7 @@ import android.graphics.Color;
 import com.google.gson.JsonObject;
 
 public class Light {
+    private String id; // id in hue bridge
     private String modelID; // id of the model
     private String name; // name of the lamp
     private int saturation; // 0 to 254
@@ -13,11 +14,9 @@ public class Light {
     private int hue; // 0 to 65535
     private ColorMode colormode;
 
-    public Light() {
-        name = "Lamp";
-    }
 
-    public Light(JsonObject data) {
+    public Light(JsonObject data, String key) {
+        this.id = key;
         this.modelID = data.get("modelid").getAsString();
         this.name = data.get("name").getAsString();
         JsonObject state = data.getAsJsonObject("state");
@@ -29,10 +28,6 @@ public class Light {
             this.hue = state.get("hue").getAsInt();
             this.colormode = ColorMode.valueOf(state.get("colormode").getAsString());
         }
-    }
-
-    public boolean isActivated() {
-        return isOn;
     }
 
     public String getName() {
@@ -61,6 +56,10 @@ public class Light {
 
     public ColorMode getColormode() {
         return colormode;
+    }
+
+    public String getId() {
+        return id;
     }
 
     public int getColor() {

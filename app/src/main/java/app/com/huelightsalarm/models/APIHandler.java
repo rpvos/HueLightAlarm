@@ -11,6 +11,7 @@ import java.util.List;
 
 import app.com.huelightsalarm.interfaces.DataSetChanged;
 import app.com.huelightsalarm.interfaces.HueLightListCallBack;
+import app.com.huelightsalarm.interfaces.LightsModifier;
 import app.com.huelightsalarm.models.data.Light;
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -20,20 +21,22 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 
-public class APIHandler {
+public class APIHandler implements LightsModifier {
     private final String BASE_URL = "http://10.0.2.2:8000/api/newdeveloper/";
+    private final HueLightListCallBack callback;
 
     private OkHttpClient client;
     private List<DataSetChanged> listeners;
 
 
-    public APIHandler() {
+    public APIHandler(HueLightListCallBack callback) {
         this.client = new OkHttpClient();
         this.listeners = new ArrayList<>();
+        this.callback = callback;
     }
 
 
-    public void getLamps(HueLightListCallBack callBack) {
+    public void getLights() {
         Request request = new Request.Builder()
                 .url(BASE_URL + "lights")
                 .build();
@@ -55,17 +58,18 @@ public class APIHandler {
                     List<Light> list = new ArrayList<>();
 
                     for (String key : jsonObject.keySet()) {
-                        list.add(new Light(jsonObject.get(key).getAsJsonObject()));
+                        list.add(new Light(jsonObject.get(key).getAsJsonObject(),key));
                     }
 
-                    callBack.setLights(list);
+                    callback.setLights(list);
                     notifyDataSetChanged();
                 }
             }
         });
     }
 
-    public void setLightColor(int id, int hue, int saturation, int brightness) {
+    @Override
+    public void setLightColor(String id, int hue, int saturation, int brightness) {
         String json = "{\n" +
                 "    \"hue\": " + hue + ",\n" +
                 "    \"on\": true,\n" +
@@ -92,12 +96,13 @@ public class APIHandler {
             @Override
             public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
                 if (response.isSuccessful())
-                    notifyDataSetChanged();
+                    getLights();
             }
         });
     }
 
-    public void setLightState(int id, boolean isOn) {
+    @Override
+    public void setLightState(String id, boolean isOn) {
         String json = "{\n" +
                 "    \"on\": "+isOn+",\n" +
                 "}";
@@ -121,7 +126,7 @@ public class APIHandler {
             @Override
             public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
                 if (response.isSuccessful())
-                    notifyDataSetChanged();
+                    getLights();
             }
         });
     }

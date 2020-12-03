@@ -7,5 +7,5 @@ import app.com.huelightsalarm.viewmodels.HueLightViewModel;
 
 public interface HueLightsListProvider {
     ArrayList<HueLightViewModel> getHueLightViewModelList();
-
+    LightsModifier getLightsModifier();
 }

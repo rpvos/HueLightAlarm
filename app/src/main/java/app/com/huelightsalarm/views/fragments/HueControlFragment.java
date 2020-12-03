@@ -1,6 +1,7 @@
 package app.com.huelightsalarm.views.fragments;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -34,12 +35,13 @@ public class HueControlFragment extends Fragment implements View.OnClickListener
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Handler uiHandler = new Handler();
+        hueControlViewModel.setUiHandler(uiHandler);
     }
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        //TODO Hue control view
         return inflater.inflate(R.layout.fragment_huecontrol, container, false);
     }
 
