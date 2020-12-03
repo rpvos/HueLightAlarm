@@ -43,4 +43,8 @@ public class HueLightCardHolder extends RecyclerView.ViewHolder {
     public ImageView getImageView() {
         return this.imageView;
     }
+
+    public CardView getCardView() {
+        return cardView;
+    }
 }

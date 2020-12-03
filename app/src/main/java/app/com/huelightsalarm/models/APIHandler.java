@@ -1,5 +1,7 @@
 package app.com.huelightsalarm.models;
 
+import android.graphics.Color;
+
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
@@ -13,6 +15,7 @@ import app.com.huelightsalarm.interfaces.DataSetChanged;
 import app.com.huelightsalarm.interfaces.HueLightListCallBack;
 import app.com.huelightsalarm.interfaces.LightsModifier;
 import app.com.huelightsalarm.models.data.Light;
+import app.com.huelightsalarm.utils.ColorCalculator;
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.MediaType;
@@ -69,7 +72,12 @@ public class APIHandler implements LightsModifier {
     }
 
     @Override
-    public void setLightColor(String id, int hue, int saturation, int brightness) {
+    public void setLightColor(String id, float hueParam, float saturationParam, float brightnessParam) {
+
+        int hue = ColorCalculator.map(0, 360, 0, 65535, hueParam);
+        int saturation = ColorCalculator.map(0, 1, 0, 254, saturationParam);
+        int brightness = ColorCalculator.map(0, 1, 0,254, brightnessParam);
+
         String json = "{\n" +
                 "    \"hue\": " + hue + ",\n" +
                 "    \"on\": true,\n" +

@@ -8,22 +8,17 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
-import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import app.com.huelightsalarm.R;
-import app.com.huelightsalarm.models.HueControlModel;
-import app.com.huelightsalarm.viewmodels.AlarmListViewModel;
+import app.com.huelightsalarm.interfaces.OnResult;
 import app.com.huelightsalarm.viewmodels.HueControlViewModel;
-import app.com.huelightsalarm.viewmodels.SharedViewModel;
-import app.com.huelightsalarm.views.adapters.AlarmCardAdapter;
 import app.com.huelightsalarm.views.adapters.HueLightCardAdapter;
 
-public class HueControlFragment extends Fragment implements View.OnClickListener {
+public class HueControlFragment extends Fragment implements View.OnClickListener, OnResult {
     private HueControlViewModel hueControlViewModel;
     private RecyclerView recyclerView;
 
@@ -62,10 +57,17 @@ public class HueControlFragment extends Fragment implements View.OnClickListener
         return new HueControlFragment(sharedViewModel);
     }
 
+
     @Override
     public void onClick(View v) {
         FragmentManager fm = getFragmentManager();
-        DialogFragment colorPickerFragment = ColorPickerFragment.newInstance();
-        colorPickerFragment.show(fm, null);
+        ColorPickerFragment colorPickerFragment = ColorPickerFragment.newInstance();
+        colorPickerFragment.setOnResult(this);
+        colorPickerFragment.show(fm, (String) v.getTag());
+    }
+
+    @Override
+    public void onResult(float hue, float saturation, float brightness, String id) {
+        this.hueControlViewModel.getLightsModifier().setLightColor(id, hue, saturation, brightness);
     }
 }

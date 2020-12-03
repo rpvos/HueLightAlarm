@@ -29,7 +29,6 @@ public class HueLightCardAdapter extends RecyclerView.Adapter<HueLightCardHolder
     public HueLightCardHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.card_huelight, parent, false);
-
         return new HueLightCardHolder(itemView);
     }
 

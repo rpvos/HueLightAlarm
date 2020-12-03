@@ -13,4 +13,5 @@
     <string name="sat">Sat</string>
     <string name="sun">Sun</string>
     <string name="placeholder">Placeholder</string>
+    <string name="select">select</string>
 </resources>
