@@ -23,7 +23,7 @@ import app.com.huelightsalarm.views.fragments.SettingsFragment;
 public class SectionsPagerAdapter extends FragmentPagerAdapter {
 
     @StringRes
-    private static final int[] TAB_TITLES = new int[]{R.string.tab_text_1, R.string.tab_text_2, R.string.tab_text_3};
+    private static final int[] TAB_TITLES = new int[]{R.string.tab_text_1, R.string.tab_text_2};
     private final Context mContext;
     private final SharedViewModel sharedViewModel;
 
@@ -43,9 +43,7 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
                 return AlarmFragment.newInstance(sharedViewModel.getAlarmListViewModel());
             case 1:
                 return HueControlFragment.newInstance(sharedViewModel.getHueControlViewModel());
-            case 2:
-                return SettingsFragment.newInstance();
-        }
+            }
         return AlarmFragment.newInstance(sharedViewModel.getAlarmListViewModel());
     }
 
@@ -57,7 +55,6 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
 
     @Override
     public int getCount() {
-        // Show 2 total pages.
-        return 3;
+        return TAB_TITLES.length;
     }
 }
