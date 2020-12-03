@@ -25,7 +25,8 @@ public class AlarmFragment extends Fragment {
     private AlarmListViewModel viewModel;
     private RecyclerView recyclerView;
 
-    public AlarmFragment() {
+    public AlarmFragment(AlarmListViewModel alarmListViewModel) {
+        this.viewModel = alarmListViewModel;
     }
 
     @Override
@@ -46,7 +47,6 @@ public class AlarmFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        this.viewModel = new ViewModelProvider(this).get(AlarmListViewModel.class);
         this.recyclerView = view.findViewById(R.id.RecyclerView_AlarmsList);
         this.recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
         AlarmCardAdapter adapter = new AlarmCardAdapter(viewModel);
@@ -66,7 +66,7 @@ public class AlarmFragment extends Fragment {
     }
 
 
-    public static Fragment newInstance(SharedViewModel sharedViewModel) {
-        return new AlarmFragment();
+    public static Fragment newInstance(AlarmListViewModel alarmListViewModel) {
+        return new AlarmFragment(alarmListViewModel);
     }
 }

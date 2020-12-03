@@ -40,13 +40,13 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
         // Return a PlaceholderFragment (defined as a static inner class below).
         switch (position){
             case 0:
-                return AlarmFragment.newInstance(sharedViewModel);
+                return AlarmFragment.newInstance(sharedViewModel.getAlarmListViewModel());
             case 1:
                 return HueControlFragment.newInstance(sharedViewModel.getHueControlViewModel());
             case 2:
                 return SettingsFragment.newInstance();
         }
-        return AlarmFragment.newInstance(sharedViewModel);
+        return AlarmFragment.newInstance(sharedViewModel.getAlarmListViewModel());
     }
 
     @Nullable

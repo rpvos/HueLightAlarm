@@ -6,6 +6,7 @@ import java.util.ArrayList;
 
 import app.com.huelightsalarm.interfaces.AlarmListProvider;
 import app.com.huelightsalarm.interfaces.DataSetChanged;
+import app.com.huelightsalarm.interfaces.HueControl;
 import app.com.huelightsalarm.models.data.AlarmModel;
 import app.com.huelightsalarm.interfaces.OnAddingAlarm;
 import app.com.huelightsalarm.models.data.TimeModel;
@@ -15,6 +16,7 @@ public class AlarmListViewModel extends ViewModel implements AlarmListProvider, 
 
     private final ArrayList<AlarmViewModel> alarmArrayList;
     private final ArrayList<DataSetChanged> subscribers;
+    private HueControl hueControl;
 
     public AlarmListViewModel() {
         this.alarmArrayList = new ArrayList<>();
@@ -52,5 +54,9 @@ public class AlarmListViewModel extends ViewModel implements AlarmListProvider, 
     @Override
     public ArrayList<AlarmViewModel> getAlarmViewModelList() {
         return alarmArrayList;
+    }
+
+    public void setHueControl(HueControl hueControl) {
+        this.hueControl = hueControl;
     }
 }

@@ -9,6 +9,8 @@ public class SharedViewModel extends ViewModel {
     public SharedViewModel() {
         this.alarmListViewModel = new AlarmListViewModel();
         this.hueControlViewModel = new HueControlViewModel();
+
+        this.alarmListViewModel.setHueControl(this.hueControlViewModel);
     }
 
     public AlarmListViewModel getAlarmListViewModel() {
