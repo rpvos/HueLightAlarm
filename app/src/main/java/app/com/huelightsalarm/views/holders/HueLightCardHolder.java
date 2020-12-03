@@ -26,7 +26,6 @@ public class HueLightCardHolder extends RecyclerView.ViewHolder {
         this.hueLightSwitch = itemView.findViewById(R.id.Switch_HueLight);
         this.cardView = itemView.findViewById(R.id.CardView_HueLamp);
         this.imageView = itemView.findViewById(R.id.ImageView_HueLight);
-        imageView.setColorFilter(Color.BLUE);
     }
 
     public TextView getLightName() {
@@ -39,5 +38,9 @@ public class HueLightCardHolder extends RecyclerView.ViewHolder {
 
     public void subscribeToOnClick(View.OnClickListener onClickListener) {
         this.cardView.setOnClickListener(onClickListener);
+    }
+
+    public ImageView getImageView() {
+        return this.imageView;
     }
 }

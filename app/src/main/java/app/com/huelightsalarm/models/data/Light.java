@@ -1,5 +1,7 @@
 package app.com.huelightsalarm.models.data;
 
+import android.graphics.Color;
+
 import com.google.gson.JsonObject;
 
 public class Light {
@@ -59,6 +61,20 @@ public class Light {
 
     public ColorMode getColormode() {
         return colormode;
+    }
+
+    public int getColor() {
+        float[] floats = new float[3];
+
+        floats[0] = map(0, 65535, 0, 360, hue);
+        floats[1] = saturation;
+        floats[2] = brightness;
+
+        return Color.HSVToColor(floats);
+    }
+
+    public float map(int initialLowerBounds, int initialUpperBounds, int lowerBounds, int upperBounds, int value) {
+        return ((upperBounds-lowerBounds)/(initialUpperBounds - (float) initialLowerBounds))*value;
     }
 
     /**

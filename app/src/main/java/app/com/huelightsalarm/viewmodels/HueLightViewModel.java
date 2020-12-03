@@ -1,5 +1,6 @@
 package app.com.huelightsalarm.viewmodels;
 
+import android.graphics.Color;
 import android.view.View;
 
 import app.com.huelightsalarm.models.data.Light;
@@ -19,6 +20,8 @@ public class HueLightViewModel implements View.OnClickListener {
         holder.getHueLightSwitch().setOnClickListener(this);
 
         holder.getLightName().setText(light.getName());
+
+        holder.getImageView().setColorFilter(light.getColor());
     }
 
     @Override
