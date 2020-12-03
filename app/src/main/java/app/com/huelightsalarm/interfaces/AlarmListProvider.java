@@ -1,4 +1,4 @@
-package app.com.huelightsalarm;
+package app.com.huelightsalarm.interfaces;
 
 import java.util.ArrayList;
 

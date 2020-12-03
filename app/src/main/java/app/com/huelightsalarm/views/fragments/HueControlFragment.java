@@ -52,6 +52,8 @@ public class HueControlFragment extends Fragment implements View.OnClickListener
         HueLightCardAdapter adapter = new HueLightCardAdapter(hueControlViewModel, this);
 
         this.recyclerView.setAdapter(adapter);
+
+        hueControlViewModel.addListener(adapter);
     }
 
     public static Fragment newInstance(HueControlViewModel sharedViewModel) {

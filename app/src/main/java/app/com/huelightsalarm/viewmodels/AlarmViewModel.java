@@ -4,8 +4,8 @@ import android.annotation.SuppressLint;
 import android.view.View;
 import android.widget.Switch;
 
-import app.com.huelightsalarm.models.AlarmModel;
-import app.com.huelightsalarm.views.adapters.AlarmCardAdapter;
+import app.com.huelightsalarm.models.data.AlarmModel;
+import app.com.huelightsalarm.views.holders.AlarmCardHolder;
 
 public class AlarmViewModel implements View.OnClickListener {
     private final AlarmModel alarmModel;
@@ -15,7 +15,7 @@ public class AlarmViewModel implements View.OnClickListener {
     }
 
     @SuppressLint("SetTextI18n")
-    public void fillCardHolder(AlarmCardAdapter.CardHolder holder) {
+    public void fillCardHolder(AlarmCardHolder holder) {
         holder.getAlarmSwitch().setChecked(alarmModel.isActivated());
 
         holder.getAlarmSwitch().setOnClickListener(this);

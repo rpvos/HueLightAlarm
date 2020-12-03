@@ -4,6 +4,7 @@ import android.view.View;
 
 import app.com.huelightsalarm.models.data.Light;
 import app.com.huelightsalarm.views.adapters.HueLightCardAdapter;
+import app.com.huelightsalarm.views.holders.HueLightCardHolder;
 
 public class HueLightViewModel implements View.OnClickListener {
     private Light light;
@@ -12,7 +13,7 @@ public class HueLightViewModel implements View.OnClickListener {
         this.light = light;
     }
 
-    public void fillCardHolder(HueLightCardAdapter.CardHolder holder) {
+    public void fillCardHolder(HueLightCardHolder holder) {
         holder.getHueLightSwitch().setChecked(light.isActivated());
 
         holder.getHueLightSwitch().setOnClickListener(this);
