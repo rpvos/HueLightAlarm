@@ -74,7 +74,7 @@ public class Light {
     }
 
     public float map(int initialLowerBounds, int initialUpperBounds, int lowerBounds, int upperBounds, int value) {
-        return ((upperBounds-lowerBounds)/(initialUpperBounds - (float) initialLowerBounds))*value;
+        return ((float) (upperBounds-lowerBounds)/ (float) (initialUpperBounds - initialLowerBounds)) * (float) value;
     }
 
     /**
