@@ -81,10 +81,11 @@ public class HueControlFragment extends Fragment implements View.OnClickListener
      */
     @Override
     public void onRefresh() {
+        hueControlViewModel.refresh();
+
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                hueControlViewModel.refresh();
                 swipeRefreshLayout.setRefreshing(false);
             }
         }, 300);
