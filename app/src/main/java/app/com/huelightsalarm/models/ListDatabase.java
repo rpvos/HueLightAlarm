@@ -49,7 +49,7 @@ public class ListDatabase implements Database, DataSetChanged {
     }
 
     @Override
-    public void setListPointer(ArrayList<AlarmViewModel> alarmArrayList) {
+    public void setListPointer(List<AlarmViewModel> alarmArrayList) {
         this.listPointer = alarmArrayList;
     }
 
