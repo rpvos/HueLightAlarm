@@ -1,10 +1,6 @@
 package app.com.huelightsalarm.viewmodels;
 
-import android.view.View;
-
 import android.os.Handler;
-
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import java.util.ArrayList;
 
@@ -29,7 +25,7 @@ public class HueControlViewModel implements HueLightsListProvider, DataSetChange
     public ArrayList<HueLightViewModel> getHueLightViewModelList() {
 
         ArrayList<HueLightViewModel> list = new ArrayList<>();
-        for (Light light : hueControlModel.getLamps()) {
+        for (Light light : hueControlModel.getLights()) {
             list.add(new HueLightViewModel(light));
         }
 

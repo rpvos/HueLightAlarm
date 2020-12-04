@@ -51,6 +51,12 @@ public class AlarmListViewModel extends ViewModel implements AlarmListProvider, 
         }
     }
 
+    public void unsubscribe(DataSetChanged unsubscriber) {
+        if (subscribers.contains(unsubscriber))
+            subscribers.remove(unsubscriber);
+    }
+
+
     @Override
     public ArrayList<AlarmViewModel> getAlarmViewModelList() {
         return alarmArrayList;
