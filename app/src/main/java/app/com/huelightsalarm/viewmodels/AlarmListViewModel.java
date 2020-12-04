@@ -25,10 +25,6 @@ public class AlarmListViewModel extends ViewModel implements AlarmListProvider, 
         this.alarmArrayList.add(new AlarmViewModel(new AlarmModel(new TimeModel(12, 50), true, new WeekModel())));
     }
 
-    public ArrayList<AlarmViewModel> getAlarmArrayList() {
-        return alarmArrayList;
-    }
-
     public void addAlarm(int hours, int minutes) {
 
         TimeModel alarmTime = new TimeModel(hours, minutes);
@@ -45,7 +41,7 @@ public class AlarmListViewModel extends ViewModel implements AlarmListProvider, 
         subscribers.add(subscriber);
     }
 
-    private void notifySubscribers() {
+    public void notifySubscribers() {
         for (DataSetChanged subscriber : subscribers) {
             subscriber.notifyDataSetChanged();
         }
@@ -64,5 +60,9 @@ public class AlarmListViewModel extends ViewModel implements AlarmListProvider, 
 
     public void setHueControl(HueControl hueControl) {
         this.hueControl = hueControl;
+    }
+
+    public HueControl getHueControl() {
+        return hueControl;
     }
 }
