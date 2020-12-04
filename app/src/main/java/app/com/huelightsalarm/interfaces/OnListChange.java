@@ -1,5 +1,6 @@
 package app.com.huelightsalarm.interfaces;
 
-public interface OnSelfRemove {
+public interface OnListChange {
     void OnSelfRemove(int position);
+    void NotifyChanges();
 }

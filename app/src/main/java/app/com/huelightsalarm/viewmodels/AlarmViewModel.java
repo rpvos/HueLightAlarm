@@ -6,17 +6,18 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Switch;
 
+import java.util.List;
+
 import app.com.huelightsalarm.R;
-import app.com.huelightsalarm.interfaces.OnSelfRemove;
+import app.com.huelightsalarm.interfaces.OnListChange;
 import app.com.huelightsalarm.models.data.AlarmModel;
 import app.com.huelightsalarm.models.data.WeekModel;
-import app.com.huelightsalarm.views.adapters.AlarmCardAdapter;
 import app.com.huelightsalarm.views.holders.AlarmCardHolder;
 
 public class AlarmViewModel implements View.OnClickListener {
     private final AlarmModel alarmModel;
-    private AlarmCardHolder alarmCardHolder;
-    private OnSelfRemove onSelfRemove;
+    private transient AlarmCardHolder alarmCardHolder;
+    private transient OnListChange onListChange;
 
 
     public AlarmViewModel(AlarmModel alarmModel) {
@@ -29,10 +30,12 @@ public class AlarmViewModel implements View.OnClickListener {
         holder.getAlarmSwitch().setChecked(alarmModel.isActivated());
         holder.getAlarmSwitch().setOnClickListener(this);
         holder.getTrashImage().setOnClickListener(this);
-        for(Button weekButton : holder.getButtons()){
+
+        List<Button> weekButtons = holder.getButtons();
+        for(Button weekButton : weekButtons){
             weekButton.setOnClickListener(this);
         }
-
+        this.updateWeekButtons(weekButtons, alarmModel.getWeekModel());
         // todo add 12 hour support
         if (alarmModel.getAlarmTime().getMinutes() > 9) {
             holder.getClockTextView().setText(alarmModel.getAlarmTime().getHour() + ":" + alarmModel.getAlarmTime().getMinutes());
@@ -46,7 +49,9 @@ public class AlarmViewModel implements View.OnClickListener {
         if(view instanceof Switch){
             boolean isActivated = ((Switch) view).isChecked();
             alarmModel.setActivated(isActivated);
+            this.onListChange.NotifyChanges();
         } else if(view instanceof Button){
+
             Button weekButton = (Button)view;
             int index = alarmCardHolder.getButtons().indexOf(weekButton);
 
@@ -55,74 +60,85 @@ public class AlarmViewModel implements View.OnClickListener {
             switch (index){
                 case 0:
                     weekModel.setMonday(!weekModel.isMonday());
-
-                    if(weekModel.isMonday()){
-                        weekButton.setBackgroundColor(view.getContext().getColor(R.color.Apricot));
-                    } else {
-                        weekButton.setBackgroundColor(view.getContext().getColor(R.color.Old_Lavender));
-                    }
                     break;
                 case 1:
                     weekModel.setTuesday(!weekModel.isTuesday());
-
-                    if(weekModel.isTuesday()){
-                        weekButton.setBackgroundColor(view.getContext().getColor(R.color.Apricot));
-                    } else {
-                        weekButton.setBackgroundColor(view.getContext().getColor(R.color.Old_Lavender));
-                    }
                     break;
                 case 2:
                     weekModel.setWednesday(!weekModel.isWednesday());
-
-                    if(weekModel.isWednesday()){
-                        weekButton.setBackgroundColor(view.getContext().getColor(R.color.Apricot));
-                    } else {
-                        weekButton.setBackgroundColor(view.getContext().getColor(R.color.Old_Lavender));
-                    }
                     break;
                 case 3:
                     weekModel.setThursday(!weekModel.isThursday());
-
-                    if(weekModel.isThursday()){
-                        weekButton.setBackgroundColor(view.getContext().getColor(R.color.Apricot));
-                    } else {
-                        weekButton.setBackgroundColor(view.getContext().getColor(R.color.Old_Lavender));
-                    }
                     break;
                 case 4:
                     weekModel.setFriday(!weekModel.isFriday());
-
-                    if(weekModel.isFriday()){
-                        weekButton.setBackgroundColor(view.getContext().getColor(R.color.Apricot));
-                    } else {
-                        weekButton.setBackgroundColor(view.getContext().getColor(R.color.Old_Lavender));
-                    }
                     break;
                 case 5:
                     weekModel.setSaturday(!weekModel.isSaturday());
-
-                    if(weekModel.isSaturday()){
-                        weekButton.setBackgroundColor(view.getContext().getColor(R.color.Apricot));
-                    } else {
-                        weekButton.setBackgroundColor(view.getContext().getColor(R.color.Old_Lavender));
-                    }
                     break;
                 case 6:
                     weekModel.setSunday(!weekModel.isSunday());
-
-                    if(weekModel.isSunday()){
-                        weekButton.setBackgroundColor(view.getContext().getColor(R.color.Apricot));
-                    } else {
-                        weekButton.setBackgroundColor(view.getContext().getColor(R.color.Old_Lavender));
-                    }
                     break;
             }
+
+            this.updateWeekButtons(this.alarmCardHolder.getButtons(), weekModel);
+
         } else if(view instanceof ImageView){
-            this.onSelfRemove.OnSelfRemove(alarmCardHolder.getAdapterPosition());
+            this.onListChange.OnSelfRemove(alarmCardHolder.getAdapterPosition());
         }
     }
 
-    public void setOnSelfRemove(OnSelfRemove onSelfRemove) {
-        this.onSelfRemove = onSelfRemove;
+    public void updateWeekButtons(List<Button> buttons, WeekModel weekModel){
+        Button weekButton;
+
+        weekButton = buttons.get(0);
+        if(weekModel.isMonday()){
+
+            weekButton.setBackgroundColor(weekButton.getContext().getColor(R.color.Apricot));
+        } else {
+            weekButton.setBackgroundColor(weekButton.getContext().getColor(R.color.Old_Lavender));
+        }
+        weekButton = buttons.get(1);
+        if(weekModel.isTuesday()){
+            weekButton.setBackgroundColor(weekButton.getContext().getColor(R.color.Apricot));
+        } else {
+            weekButton.setBackgroundColor(weekButton.getContext().getColor(R.color.Old_Lavender));
+        }
+        weekButton = buttons.get(2);
+        if(weekModel.isWednesday()){
+            weekButton.setBackgroundColor(weekButton.getContext().getColor(R.color.Apricot));
+        } else {
+            weekButton.setBackgroundColor(weekButton.getContext().getColor(R.color.Old_Lavender));
+        }
+        weekButton = buttons.get(3);
+        if(weekModel.isThursday()){
+            weekButton.setBackgroundColor(weekButton.getContext().getColor(R.color.Apricot));
+        } else {
+            weekButton.setBackgroundColor(weekButton.getContext().getColor(R.color.Old_Lavender));
+        }
+        weekButton = buttons.get(4);
+        if(weekModel.isFriday()){
+            weekButton.setBackgroundColor(weekButton.getContext().getColor(R.color.Apricot));
+        } else {
+            weekButton.setBackgroundColor(weekButton.getContext().getColor(R.color.Old_Lavender));
+        }
+        weekButton = buttons.get(5);
+        if(weekModel.isSaturday()){
+            weekButton.setBackgroundColor(weekButton.getContext().getColor(R.color.Apricot));
+        } else {
+            weekButton.setBackgroundColor(weekButton.getContext().getColor(R.color.Old_Lavender));
+        }
+        weekButton = buttons.get(6);
+        if(weekModel.isSunday()){
+            weekButton.setBackgroundColor(weekButton.getContext().getColor(R.color.Apricot));
+        } else {
+            weekButton.setBackgroundColor(weekButton.getContext().getColor(R.color.Old_Lavender));
+        }
+        if(onListChange != null)
+            this.onListChange.NotifyChanges();
+    }
+
+    public void setOnListChange(OnListChange onListChange) {
+        this.onListChange = onListChange;
     }
 }

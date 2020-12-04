@@ -1,5 +1,6 @@
 package app.com.huelightsalarm.views.fragments;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,8 +21,11 @@ import app.com.huelightsalarm.viewmodels.AlarmListViewModel;
 import app.com.huelightsalarm.viewmodels.SharedViewModel;
 import app.com.huelightsalarm.views.adapters.AlarmCardAdapter;
 
+import static android.content.Context.MODE_PRIVATE;
+
 public class AlarmFragment extends Fragment {
 
+    private SharedPreferences sharedPreferences;
     private AlarmListViewModel viewModel;
     private RecyclerView recyclerView;
 
@@ -32,7 +36,6 @@ public class AlarmFragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         //TODO alarm logic
-
         super.onCreate(savedInstanceState);
     }
 
@@ -46,7 +49,6 @@ public class AlarmFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
         this.recyclerView = view.findViewById(R.id.RecyclerView_AlarmsList);
         this.recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
         AlarmCardAdapter adapter = new AlarmCardAdapter(viewModel);

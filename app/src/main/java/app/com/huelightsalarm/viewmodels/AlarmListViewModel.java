@@ -6,13 +6,16 @@ import java.util.ArrayList;
 
 import app.com.huelightsalarm.interfaces.AlarmListProvider;
 import app.com.huelightsalarm.interfaces.DataSetChanged;
+import app.com.huelightsalarm.interfaces.Database;
 import app.com.huelightsalarm.interfaces.HueControl;
+import app.com.huelightsalarm.interfaces.OnListChange;
+import app.com.huelightsalarm.models.ListDatabase;
 import app.com.huelightsalarm.models.data.AlarmModel;
 import app.com.huelightsalarm.interfaces.OnAddingAlarm;
 import app.com.huelightsalarm.models.data.TimeModel;
 import app.com.huelightsalarm.models.data.WeekModel;
 
-public class AlarmListViewModel extends ViewModel implements AlarmListProvider, OnAddingAlarm {
+public class AlarmListViewModel extends ViewModel implements AlarmListProvider, OnAddingAlarm, OnListChange {
 
     private final ArrayList<AlarmViewModel> alarmArrayList;
     private final ArrayList<DataSetChanged> subscribers;
@@ -29,12 +32,17 @@ public class AlarmListViewModel extends ViewModel implements AlarmListProvider, 
 
         TimeModel alarmTime = new TimeModel(hours, minutes);
         WeekModel weekModel = new WeekModel();
-
         AlarmModel newAlarm = new AlarmModel(alarmTime, true, weekModel);
-
-        alarmArrayList.add(new AlarmViewModel(newAlarm));
+        this.alarmArrayList.add(new AlarmViewModel(newAlarm));
 
         notifySubscribers();
+    }
+
+    @Override
+    public void OnSelfRemove(int position) {
+        this.alarmArrayList.remove(position);
+
+        this.notifySubscribers();
     }
 
     public void subscribe(DataSetChanged subscriber) {
@@ -48,10 +56,13 @@ public class AlarmListViewModel extends ViewModel implements AlarmListProvider, 
     }
 
     public void unsubscribe(DataSetChanged unsubscriber) {
-        if (subscribers.contains(unsubscriber))
-            subscribers.remove(unsubscriber);
+        subscribers.remove(unsubscriber);
     }
 
+    public void setListRetriever(Database database){
+        database.setListPointer(this.alarmArrayList);
+        database.loadList();
+    }
 
     @Override
     public ArrayList<AlarmViewModel> getAlarmViewModelList() {
@@ -64,5 +75,19 @@ public class AlarmListViewModel extends ViewModel implements AlarmListProvider, 
 
     public HueControl getHueControl() {
         return hueControl;
+    }
+
+    @Override
+    public void NotifyChanges() {
+        for(DataSetChanged dataSetChanged : this.subscribers){
+            if(dataSetChanged instanceof Database){
+                ((Database) dataSetChanged).saveList(this.alarmArrayList);
+            }
+        }
+    }
+
+    @Override
+    public OnListChange onSelfRemove() {
+        return this;
     }
 }

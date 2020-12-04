@@ -6,4 +6,5 @@ import app.com.huelightsalarm.viewmodels.AlarmViewModel;
 
 public interface AlarmListProvider {
     ArrayList<AlarmViewModel> getAlarmViewModelList();
+    OnListChange onSelfRemove();
 }

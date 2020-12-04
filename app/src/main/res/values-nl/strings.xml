@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Bright Morning!</string>
+    <string name="tab_text_1">Wekkers</string>
+    <string name="tab_text_2">Hue besturen</string>
+    <string name="app_title">BRIGHT MORNING!</string>
+    <string name="tab_text_3">Instellingen</string>
+    <string name="add">Voeg toe</string>
+    <string name="mon">Ma</string>
+    <string name="tue">Di</string>
+    <string name="wed">Wo</string>
+    <string name="thu">Do</string>
+    <string name="fri">Vr</string>
+    <string name="sat">Za</string>
+    <string name="sun">Zo</string>
+    <string name="placeholder">Placeholder</string>
+    <string name="select">selecteer</string>
+    <string name="confirm">goedkeuren</string>
+    <string name="cancel">annuleren</string>
+</resources>
