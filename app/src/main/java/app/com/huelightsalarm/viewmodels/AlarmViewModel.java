@@ -59,7 +59,11 @@ public class AlarmViewModel implements View.OnClickListener {
     }
 
     public void updateHolder(AlarmCardHolder holder) {
-        holder.getSpinner().setSelection(Integer.parseInt(alarmModel.getSelectedLight()) - 1);
+        if (alarmModel.getSelectedLight() != null) {
+            int value = Integer.parseInt(alarmModel.getSelectedLight());
+            if (value <= holder.getSpinner().getAdapter().getCount() && value > 0)
+                holder.getSpinner().setSelection(value - 1);
+        }
     }
 
     @Override
