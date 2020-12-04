@@ -45,8 +45,6 @@ public class AlarmCardAdapter extends RecyclerView.Adapter<AlarmCardHolder> impl
         Spinner spinner = holder.getSpinner();
         List<HueLightViewModel> list = listProvider.getLights();
 
-
-
         ArrayAdapter<HueLightViewModel> spinnerArrayAdapter = new ArrayAdapter<>(spinner.getContext(), android.R.layout.simple_spinner_item, list);
 
         spinner.setAdapter(spinnerArrayAdapter);
@@ -58,6 +56,7 @@ public class AlarmCardAdapter extends RecyclerView.Adapter<AlarmCardHolder> impl
             viewModel.updateHolder(holder);
         });
 
+        viewModel.updateHolder(holder);
 
         viewModel.setOnListChange(this.listProvider.onSelfRemove());
     }

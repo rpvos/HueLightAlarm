@@ -46,10 +46,8 @@ public class AlarmViewModel implements View.OnClickListener {
         holder.getSpinner().setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-
                 alarmModel.setSelectedLamp(((HueLightViewModel) adapterView.getSelectedItem()).getID());
                 onListChange.NotifyChanges(alarmModel);
-
             }
 
             @Override
