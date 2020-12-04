@@ -5,4 +5,6 @@ public interface LightsModifier {
     void setLightState(String id, boolean isOn);
 
     void refresh();
+
+    void setBrightness(String id, int brightness);
 }

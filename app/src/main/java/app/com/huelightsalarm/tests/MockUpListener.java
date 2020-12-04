@@ -17,4 +17,8 @@ public class MockUpListener implements DataSetChanged {
     public boolean isNotified() {
         return isNotified;
     }
+
+    public void setNotified(boolean state) {
+        isNotified = state;
+    }
 }

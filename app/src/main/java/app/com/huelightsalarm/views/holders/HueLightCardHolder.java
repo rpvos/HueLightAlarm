@@ -10,6 +10,8 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.slider.Slider;
+
 import app.com.huelightsalarm.R;
 
 public class HueLightCardHolder extends RecyclerView.ViewHolder {
@@ -18,6 +20,7 @@ public class HueLightCardHolder extends RecyclerView.ViewHolder {
     private final TextView lightName;
     private final Switch hueLightSwitch;
     private final ImageView imageView;
+    private final Slider slider;
 
     public HueLightCardHolder(@NonNull View itemView) {
         super(itemView);
@@ -26,6 +29,7 @@ public class HueLightCardHolder extends RecyclerView.ViewHolder {
         this.hueLightSwitch = itemView.findViewById(R.id.Switch_HueLight);
         this.cardView = itemView.findViewById(R.id.CardView_HueLamp);
         this.imageView = itemView.findViewById(R.id.ImageView_HueLight);
+        this.slider = itemView.findViewById(R.id.Slider_HueLight);
     }
 
     public TextView getLightName() {
@@ -46,5 +50,9 @@ public class HueLightCardHolder extends RecyclerView.ViewHolder {
 
     public CardView getCardView() {
         return cardView;
+    }
+
+    public Slider getSlider() {
+        return slider;
     }
 }

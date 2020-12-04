@@ -61,7 +61,7 @@ public class APIHandler implements LightsModifier {
                     List<Light> list = new ArrayList<>();
 
                     for (String key : jsonObject.keySet()) {
-                        list.add(new Light(jsonObject.get(key).getAsJsonObject(),key));
+                        list.add(new Light(jsonObject.get(key).getAsJsonObject(), key));
                     }
 
                     callback.setLights(list);
@@ -76,7 +76,7 @@ public class APIHandler implements LightsModifier {
 
         int hue = ColorCalculator.map(0, 360, 0, 65535, hueParam);
         int saturation = ColorCalculator.map(0, 1, 0, 254, saturationParam);
-        int brightness = ColorCalculator.map(0, 1, 0,254, brightnessParam);
+        int brightness = ColorCalculator.map(0, 1, 0, 254, brightnessParam);
 
         String json = "{\n" +
                 "    \"hue\": " + hue + ",\n" +
@@ -112,7 +112,7 @@ public class APIHandler implements LightsModifier {
     @Override
     public void setLightState(String id, boolean isOn) {
         String json = "{\n" +
-                "    \"on\": "+isOn+",\n" +
+                "    \"on\": " + isOn + ",\n" +
                 "}";
 
         RequestBody body = RequestBody.create(json, MediaType.get("application/json; charset=utf-8"));
@@ -142,6 +142,36 @@ public class APIHandler implements LightsModifier {
     @Override
     public void refresh() {
         getLights();
+    }
+
+    @Override
+    public void setBrightness(String id, int brightness) {
+        String json = "{\n" +
+                "    \"bri\": " + brightness + ",\n" +
+                "}";
+
+        RequestBody body = RequestBody.create(json, MediaType.get("application/json; charset=utf-8"));
+
+        Request request = new Request.Builder()
+                .url(BASE_URL + "lights/" + id + "/state")
+                .put(body)
+                .build();
+
+        Call call = client.newCall(request);
+
+
+        call.enqueue(new Callback() {
+            @Override
+            public void onFailure(@NotNull Call call, @NotNull IOException e) {
+
+            }
+
+            @Override
+            public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
+                if (response.isSuccessful())
+                    getLights();
+            }
+        });
     }
 
     public void notifyDataSetChanged() {
