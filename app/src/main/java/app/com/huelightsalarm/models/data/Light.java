@@ -74,7 +74,9 @@ public class Light {
         return Color.HSVToColor(floats);
     }
 
-
+    public float getPercentageBrightness() {
+        return ColorCalculator.map(0, 254, 0, 1, brightness);
+    }
 
 
     /**
