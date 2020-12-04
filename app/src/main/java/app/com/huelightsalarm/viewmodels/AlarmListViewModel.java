@@ -24,8 +24,6 @@ public class AlarmListViewModel extends ViewModel implements AlarmListProvider, 
     public AlarmListViewModel() {
         this.alarmArrayList = new ArrayList<>();
         this.subscribers = new ArrayList<>();
-
-        this.alarmArrayList.add(new AlarmViewModel(new AlarmModel(new TimeModel(12, 50), true, new WeekModel())));
     }
 
     public void addAlarm(int hours, int minutes) {
