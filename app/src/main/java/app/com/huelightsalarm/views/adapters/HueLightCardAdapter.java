@@ -37,6 +37,7 @@ public class HueLightCardAdapter extends RecyclerView.Adapter<HueLightCardHolder
         HueLightViewModel model = this.listProvider.getHueLightViewModelList().get(position);
         model.fillCardHolder(holder, listProvider.getLightsModifier());
         holder.subscribeToOnClick(onClickListener);
+        holder.getSettings().setOnClickListener(onClickListener);
     }
 
     @Override

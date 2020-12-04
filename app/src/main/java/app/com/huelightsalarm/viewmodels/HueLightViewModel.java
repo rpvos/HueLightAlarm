@@ -2,6 +2,7 @@ package app.com.huelightsalarm.viewmodels;
 
 import android.view.DragEvent;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.Switch;
 
 import androidx.annotation.NonNull;
@@ -34,11 +35,10 @@ public class HueLightViewModel implements View.OnClickListener, Slider.OnSliderT
         holder.getCardView().setTag(light.getId());
 
         Slider slider = holder.getSlider();
-
         slider.setValue(light.getPercentageBrightness());
-
         slider.clearOnSliderTouchListeners();
         slider.addOnSliderTouchListener(this);
+
 
         this.lightsModifier = lightsModifier;
     }

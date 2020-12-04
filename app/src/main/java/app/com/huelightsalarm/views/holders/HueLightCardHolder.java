@@ -21,6 +21,7 @@ public class HueLightCardHolder extends RecyclerView.ViewHolder {
     private final Switch hueLightSwitch;
     private final ImageView imageView;
     private final Slider slider;
+    private final ImageView settings;
 
     public HueLightCardHolder(@NonNull View itemView) {
         super(itemView);
@@ -30,6 +31,11 @@ public class HueLightCardHolder extends RecyclerView.ViewHolder {
         this.cardView = itemView.findViewById(R.id.CardView_HueLamp);
         this.imageView = itemView.findViewById(R.id.ImageView_HueLight);
         this.slider = itemView.findViewById(R.id.Slider_HueLight);
+        this.settings = itemView.findViewById(R.id.ImageView_Settings);
+    }
+
+    public ImageView getSettings() {
+        return settings;
     }
 
     public TextView getLightName() {
