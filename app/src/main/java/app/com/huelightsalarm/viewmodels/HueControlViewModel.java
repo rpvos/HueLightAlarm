@@ -44,7 +44,10 @@ public class HueControlViewModel implements HueLightsListProvider, DataSetChange
     @Override
     public void notifyDataSetChanged() {
         for (DataSetChanged listener : listeners) {
-            uiHandler.post(listener::notifyDataSetChanged);
+            if (uiHandler != null)
+                uiHandler.post(listener::notifyDataSetChanged);
+            else
+                listener.notifyDataSetChanged();
         }
     }
 
@@ -52,8 +55,16 @@ public class HueControlViewModel implements HueLightsListProvider, DataSetChange
         this.uiHandler = uiHandler;
     }
 
+    public Handler getUiHandler() {
+        return uiHandler;
+    }
 
     public void refresh() {
         hueControlModel.getAPIHandler().refresh();
+    }
+
+    public void removeListener(DataSetChanged listener) {
+        if (listeners.contains(listener))
+            listeners.remove(listener);
     }
 }

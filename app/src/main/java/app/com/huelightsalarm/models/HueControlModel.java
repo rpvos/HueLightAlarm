@@ -45,5 +45,7 @@ public class HueControlModel implements HueLightListCallBack, DataSetChanged {
     public LightsModifier getAPIHandler() {
         return handler;
     }
+
+
 }
 
