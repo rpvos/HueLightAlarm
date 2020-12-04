@@ -139,6 +139,11 @@ public class APIHandler implements LightsModifier {
         });
     }
 
+    @Override
+    public void refresh() {
+        getLights();
+    }
+
     public void notifyDataSetChanged() {
         for (DataSetChanged listener : listeners) {
             listener.notifyDataSetChanged();

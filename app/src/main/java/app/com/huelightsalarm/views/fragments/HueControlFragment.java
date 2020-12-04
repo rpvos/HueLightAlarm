@@ -12,15 +12,17 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import app.com.huelightsalarm.R;
 import app.com.huelightsalarm.interfaces.OnResult;
 import app.com.huelightsalarm.viewmodels.HueControlViewModel;
 import app.com.huelightsalarm.views.adapters.HueLightCardAdapter;
 
-public class HueControlFragment extends Fragment implements View.OnClickListener, OnResult {
+public class HueControlFragment extends Fragment implements View.OnClickListener, OnResult, SwipeRefreshLayout.OnRefreshListener {
     private HueControlViewModel hueControlViewModel;
     private RecyclerView recyclerView;
+    private SwipeRefreshLayout swipeRefreshLayout;
 
 
     public HueControlFragment(HueControlViewModel hueControlViewModel) {
@@ -51,6 +53,9 @@ public class HueControlFragment extends Fragment implements View.OnClickListener
         this.recyclerView.setAdapter(adapter);
 
         hueControlViewModel.addListener(adapter);
+
+        this.swipeRefreshLayout = view.findViewById(R.id.swipe_refresh_layout);
+        this.swipeRefreshLayout.setOnRefreshListener(this);
     }
 
     public static Fragment newInstance(HueControlViewModel sharedViewModel) {
@@ -69,5 +74,19 @@ public class HueControlFragment extends Fragment implements View.OnClickListener
     @Override
     public void onResult(float hue, float saturation, float brightness, String id) {
         this.hueControlViewModel.getLightsModifier().setLightColor(id, hue, saturation, brightness);
+    }
+
+    /**
+     * Method created to refresh the list of lamps
+     */
+    @Override
+    public void onRefresh() {
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                hueControlViewModel.refresh();
+                swipeRefreshLayout.setRefreshing(false);
+            }
+        }, 300);
     }
 }

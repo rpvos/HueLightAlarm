@@ -4,6 +4,8 @@ import android.view.View;
 
 import android.os.Handler;
 
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
+
 import java.util.ArrayList;
 
 import app.com.huelightsalarm.interfaces.DataSetChanged;
@@ -52,5 +54,10 @@ public class HueControlViewModel implements HueLightsListProvider, DataSetChange
 
     public void setUiHandler(Handler uiHandler) {
         this.uiHandler = uiHandler;
+    }
+
+
+    public void refresh() {
+        hueControlModel.getAPIHandler().refresh();
     }
 }
