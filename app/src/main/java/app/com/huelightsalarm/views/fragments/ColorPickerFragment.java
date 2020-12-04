@@ -61,7 +61,7 @@ public class ColorPickerFragment extends DialogFragment implements View.OnClickL
         float[] floats = new float[3];
         Color.colorToHSV(colorPickerView.getColor(),floats);
         onResult.onResult(floats[0], floats[1], floats[2], getTag());
-        //TODO add nicer fix
+
         assert getFragmentManager() != null;
         getFragmentManager().beginTransaction().remove(this).commit();
     }

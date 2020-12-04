@@ -50,7 +50,6 @@ public class AddAlarmFragment extends DialogFragment {
         // pass time
         onAddingAlarmListener.addAlarm(timePicker.getHour(),timePicker.getMinute());
 
-        //todo add nicer fix
         assert getFragmentManager() != null;
         getFragmentManager().beginTransaction().remove(this).commit();
     }

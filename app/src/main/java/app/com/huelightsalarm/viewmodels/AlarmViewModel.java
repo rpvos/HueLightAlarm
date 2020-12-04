@@ -36,7 +36,6 @@ public class AlarmViewModel implements View.OnClickListener {
             weekButton.setOnClickListener(this);
         }
         this.updateWeekButtons(weekButtons, alarmModel.getWeekModel());
-        // todo add 12 hour support
         if (alarmModel.getAlarmTime().getMinutes() > 9) {
             holder.getClockTextView().setText(alarmModel.getAlarmTime().getHour() + ":" + alarmModel.getAlarmTime().getMinutes());
         } else {
