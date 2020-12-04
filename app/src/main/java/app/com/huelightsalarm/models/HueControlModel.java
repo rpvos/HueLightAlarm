@@ -27,7 +27,7 @@ public class HueControlModel implements HueLightListCallBack, DataSetChanged {
         listeners.add(listener);
     }
 
-    public List<Light> getLamps() {
+    public List<Light> getLights() {
         return lights;
     }
 
@@ -45,5 +45,7 @@ public class HueControlModel implements HueLightListCallBack, DataSetChanged {
     public LightsModifier getAPIHandler() {
         return handler;
     }
+
+
 }
 

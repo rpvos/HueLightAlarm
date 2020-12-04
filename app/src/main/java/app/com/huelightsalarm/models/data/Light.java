@@ -4,6 +4,8 @@ import android.graphics.Color;
 
 import com.google.gson.JsonObject;
 
+import app.com.huelightsalarm.utils.ColorCalculator;
+
 public class Light {
     private String id; // id in hue bridge
     private String modelID; // id of the model
@@ -65,16 +67,14 @@ public class Light {
     public int getColor() {
         float[] floats = new float[3];
 
-        floats[0] = map(0, 65535, 0, 360, hue);
+        floats[0] = ColorCalculator.map(0, 65535, 0, 360, hue);
         floats[1] = saturation;
         floats[2] = brightness;
 
         return Color.HSVToColor(floats);
     }
 
-    public float map(int initialLowerBounds, int initialUpperBounds, int lowerBounds, int upperBounds, int value) {
-        return ((float) (upperBounds-lowerBounds)/ (float) (initialUpperBounds - initialLowerBounds)) * (float) value;
-    }
+
 
 
     /**
