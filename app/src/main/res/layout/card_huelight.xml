@@ -23,18 +23,18 @@
                 android:layout_marginTop="6dp"
                 android:src="@drawable/light_bulb"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"/>
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/TextView_HueLight"
                 android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
                 android:text="@string/placeholder"
                 android:textSize="30sp"
-                android:layout_marginBottom="8dp"
-                android:layout_height="wrap_content"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/ImageView_HueLight"
-                app:layout_constraintTop_toTopOf="parent"/>
+                app:layout_constraintTop_toTopOf="parent" />
 
             <Switch
                 android:id="@+id/Switch_HueLight"
@@ -45,12 +45,21 @@
                 app:layout_constraintTop_toBottomOf="@id/TextView_HueLight" />
 
             <com.google.android.material.slider.Slider
+                android:id="@+id/Slider_HueLight"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                android:id="@+id/Slider_HueLight"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/Switch_HueLight"
                 app:layout_constraintTop_toBottomOf="@id/TextView_HueLight" />
+
+            <ImageButton
+                android:id="@+id/ImageView_Settings"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_margin="12dp"
+                android:src="@drawable/ic_baseline_settings_24"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

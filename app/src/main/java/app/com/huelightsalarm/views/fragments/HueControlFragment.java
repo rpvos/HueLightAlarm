@@ -6,6 +6,8 @@ import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -67,14 +69,25 @@ public class HueControlFragment extends Fragment implements View.OnClickListener
     @Override
     public void onClick(View v) {
         FragmentManager fm = getFragmentManager();
-        ColorPickerFragment colorPickerFragment = ColorPickerFragment.newInstance();
-        colorPickerFragment.setOnResult(this);
-        colorPickerFragment.show(fm, (String) v.getTag());
+        if (v instanceof ImageButton) {
+            LightSettingsFragment lightSettingsFragment = LightSettingsFragment.newInstance();
+            lightSettingsFragment.setOnResult(this);
+            lightSettingsFragment.show(fm, (String) v.getTag());
+        } else {
+            ColorPickerFragment colorPickerFragment = ColorPickerFragment.newInstance();
+            colorPickerFragment.setOnResult(this);
+            colorPickerFragment.show(fm, (String) v.getTag());
+        }
     }
 
     @Override
     public void onResult(float hue, float saturation, float brightness, String id) {
         this.hueControlViewModel.getLightsModifier().setLightColor(id, hue, saturation, brightness);
+    }
+
+    @Override
+    public void onResult(String group, String name, String id) {
+        //todo
     }
 
     /**

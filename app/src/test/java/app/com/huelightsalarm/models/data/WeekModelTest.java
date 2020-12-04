@@ -95,4 +95,12 @@ public class WeekModelTest {
 
         assertTrue("Setter is incorrect", weekModel.isSunday() != state);
     }
+
+    @Test
+    public void getByte() {
+        weekModel.turnAllOff();
+        assert (weekModel.getByte() == 0);
+        weekModel.turnAllOn();
+        assert(weekModel.getByte() == 127);
+    }
 }

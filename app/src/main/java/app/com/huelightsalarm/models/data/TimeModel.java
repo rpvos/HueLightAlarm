@@ -14,6 +14,18 @@ public class TimeModel {
         return hour;
     }
 
+    public String getStringHour() {
+        if (hour < 10)
+            return "0" + hour;
+        return "" + hour;
+    }
+
+    public String getStringMinutes() {
+        if (minutes < 10)
+            return "0" + minutes;
+        return "" + minutes;
+    }
+
     public int getMinutes() {
         return minutes;
     }

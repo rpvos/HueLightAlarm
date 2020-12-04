@@ -36,6 +36,37 @@ public class WeekModel {
         this.sunday = false;
     }
 
+    public String getByte() {
+        int value = 0;
+        if (monday)
+            value ^= 1;
+        value <<= 1;
+        if (tuesday) {
+            value ^= 1;
+        }
+        value <<= 1;
+        if (wednesday)
+            value ^= 1;
+        value <<= 1;
+        if (thursday)
+            value ^= 1;
+        value <<= 1;
+        if (friday)
+            value ^= 1;
+        value <<= 1;
+        if (saturday)
+            value ^= 1;
+        value <<= 1;
+        if (sunday)
+            value ^= 1;
+
+        String string = "" + value;
+        while (string.length() < 3)
+            string = "0" + string;
+
+        return string;
+    }
+
     public boolean isMonday() {
         return monday;
     }

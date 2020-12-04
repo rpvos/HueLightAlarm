@@ -16,4 +16,5 @@
     <string name="select">select</string>
     <string name="confirm">confirm</string>
     <string name="cancel">cancel</string>
+    <string name="light_name">Light name</string>
 </resources>
