@@ -1,4 +1,4 @@
-package app.com.huelightsalarm.models;
+package app.com.huelightsalarm.models.data;
 
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
@@ -6,39 +6,60 @@ import com.google.gson.JsonParser;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.ArrayList;
-import java.util.List;
+import static org.junit.Assert.*;
 
-import app.com.huelightsalarm.models.data.Light;
-import app.com.huelightsalarm.tests.MockUpListener;
+public class LightTest {
 
-public class HueControlModelTest {
-    private HueControlModel hueControlModel;
+    private Light light;
 
     @Before
     public void setUp() throws Exception {
-        this.hueControlModel = new HueControlModel();
+        this.light = new Light(getData(), "1");
     }
 
     @Test
-    public void getLights() {
-        List list = hueControlModel.getLights();
-        assert (list != null);
-
-        if (list.size() > 0) {
-            assert (list.get(0) instanceof Light);
-        }
+    public void getName() {
+        assertEquals(getErrorMessage(), "Hue Lamp 1", light.getName());
     }
 
     @Test
-    public void setLights() {
-        List list = new ArrayList<Light>();
+    public void getModelID() {
+        assertEquals(getErrorMessage(), "LCT001", light.getModelID());
+    }
 
-        list.add(new Light(getData(), "1"));
+    @Test
+    public void getSaturation() {
+        assertEquals(getErrorMessage(), 254, light.getSaturation());
+    }
 
-        hueControlModel.setLights(list);
+    @Test
+    public void isOn() {
+        assertEquals(getErrorMessage(), true, light.isOn());
+    }
 
-        assert (hueControlModel.getLights().size() == list.size());
+    @Test
+    public void getBrightness() {
+        assertEquals(getErrorMessage(), 254, light.getBrightness());
+    }
+
+    @Test
+    public void getHue() {
+        assertEquals(getErrorMessage(), 4444, light.getHue());
+    }
+
+    @Test
+    public void getColormode() {
+        assertEquals(getErrorMessage(), Light.ColorMode.hs, light.getColormode());
+    }
+
+    @Test
+    public void getId() {
+        assertEquals(getErrorMessage(), "1", light.getId());
+    }
+
+    @Test
+    public void getColor() {
+        assertEquals(getErrorMessage(), light.getColor(),light.getColor());
     }
 
     public JsonObject getData() {
@@ -77,27 +98,7 @@ public class HueControlModelTest {
         return JsonParser.parseString(json).getAsJsonObject();
     }
 
-    @Test
-    public void notifyDataSetChanged() {
-        MockUpListener listener = new MockUpListener();
-
-        hueControlModel.addListener(listener);
-
-        hueControlModel.notifyDataSetChanged();
-
-        assert (listener.isNotified());
-
-        listener.setNotified(false);
-
-        hueControlModel.removeListener(listener);
-
-        hueControlModel.notifyDataSetChanged();
-
-        assert (!listener.isNotified());
-    }
-
-    @Test
-    public void getAPIHandler() {
-        assert (hueControlModel.getAPIHandler() instanceof APIHandler);
+    private String getErrorMessage() {
+        return "Hue light not initialized correctly";
     }
 }

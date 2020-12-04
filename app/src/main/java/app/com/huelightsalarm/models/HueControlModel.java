@@ -46,6 +46,15 @@ public class HueControlModel implements HueLightListCallBack, DataSetChanged {
         return handler;
     }
 
+    public void removeListener(DataSetChanged listener) {
+        if (listeners.contains(listener))
+            listeners.remove(listener);
+    }
+
+    public void addListener(DataSetChanged listener) {
+        listeners.add(listener);
+    }
+
 
 }
 

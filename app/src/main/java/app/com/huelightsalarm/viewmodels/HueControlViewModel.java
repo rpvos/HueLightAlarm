@@ -37,20 +37,6 @@ public class HueControlViewModel implements HueLightsListProvider, DataSetChange
         return hueControlModel.getAPIHandler();
     }
 
-    public void addListener(DataSetChanged listener) {
-        listeners.add(listener);
-    }
-
-    @Override
-    public void notifyDataSetChanged() {
-        for (DataSetChanged listener : listeners) {
-            if (uiHandler != null)
-                uiHandler.post(listener::notifyDataSetChanged);
-            else
-                listener.notifyDataSetChanged();
-        }
-    }
-
     public void setUiHandler(Handler uiHandler) {
         this.uiHandler = uiHandler;
     }
@@ -66,5 +52,19 @@ public class HueControlViewModel implements HueLightsListProvider, DataSetChange
     public void removeListener(DataSetChanged listener) {
         if (listeners.contains(listener))
             listeners.remove(listener);
+    }
+
+    public void addListener(DataSetChanged listener) {
+        listeners.add(listener);
+    }
+
+    @Override
+    public void notifyDataSetChanged() {
+        for (DataSetChanged listener : listeners) {
+            if (uiHandler != null)
+                uiHandler.post(listener::notifyDataSetChanged);
+            else
+                listener.notifyDataSetChanged();
+        }
     }
 }
