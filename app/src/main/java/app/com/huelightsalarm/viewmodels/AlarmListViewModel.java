@@ -78,7 +78,12 @@ public class AlarmListViewModel extends ViewModel implements AlarmListProvider, 
     }
 
     @Override
-    public void NotifyChanges() {
+    public void NotifyChanges(AlarmModel alarmModel) {
+        hueControl.setSchedule(alarmModel);
+        updateDatabase();
+    }
+
+    private void updateDatabase() {
         for(DataSetChanged dataSetChanged : this.subscribers){
             if(dataSetChanged instanceof Database){
                 ((Database) dataSetChanged).saveList(this.alarmArrayList);

@@ -49,7 +49,7 @@ public class AlarmViewModel implements View.OnClickListener {
         if(view instanceof Switch){
             boolean isActivated = ((Switch) view).isChecked();
             alarmModel.setActivated(isActivated);
-            this.onListChange.NotifyChanges();
+            this.onListChange.NotifyChanges(alarmModel);
         } else if(view instanceof Button){
 
             Button weekButton = (Button)view;
@@ -135,7 +135,7 @@ public class AlarmViewModel implements View.OnClickListener {
             weekButton.setBackgroundColor(weekButton.getContext().getColor(R.color.Old_Lavender));
         }
         if(onListChange != null)
-            this.onListChange.NotifyChanges();
+            this.onListChange.NotifyChanges(alarmModel);
     }
 
     public void setOnListChange(OnListChange onListChange) {

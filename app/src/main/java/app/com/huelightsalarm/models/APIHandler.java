@@ -14,6 +14,7 @@ import java.util.List;
 import app.com.huelightsalarm.interfaces.DataSetChanged;
 import app.com.huelightsalarm.interfaces.HueLightListCallBack;
 import app.com.huelightsalarm.interfaces.LightsModifier;
+import app.com.huelightsalarm.models.data.AlarmModel;
 import app.com.huelightsalarm.models.data.Light;
 import app.com.huelightsalarm.utils.ColorCalculator;
 import okhttp3.Call;
@@ -155,6 +156,46 @@ public class APIHandler implements LightsModifier {
         Request request = new Request.Builder()
                 .url(BASE_URL + "lights/" + id + "/state")
                 .put(body)
+                .build();
+
+        Call call = client.newCall(request);
+
+
+        call.enqueue(new Callback() {
+            @Override
+            public void onFailure(@NotNull Call call, @NotNull IOException e) {
+
+            }
+
+            @Override
+            public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
+                if (response.isSuccessful())
+                    getLights();
+            }
+        });
+    }
+
+    @Override
+    public void setSchedule(AlarmModel alarmModel) {
+
+        String json = "{\n" +
+                "    \"name\": \"Wake up\",\n" +
+                "    \"description\": \"My wake up alarm\",\n" +
+                "    \"command\": {\n" +
+                "        \"address\": \" /api/newdeveloper/lights/1\",\n" +
+                "        \"method\": \"POST\",\n" +
+                "        \"body\": {\n" +
+                "            \"on\": true\n" +
+                "        }\n" +
+                "    },\n" +
+                "    \"timePattern\": \"W"+alarmModel.getWeekModel().getByte()+"/T"+alarmModel.getAlarmTime().getStringHour()+":"+alarmModel.getAlarmTime().getStringMinutes()+":00\"\n" +
+                "}";
+
+        RequestBody body = RequestBody.create(json, MediaType.get("application/json; charset=utf-8"));
+
+        Request request = new Request.Builder()
+                .url(BASE_URL + "schedules")
+                .post(body)
                 .build();
 
         Call call = client.newCall(request);

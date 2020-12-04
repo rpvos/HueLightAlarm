@@ -9,6 +9,7 @@ import app.com.huelightsalarm.interfaces.HueControl;
 import app.com.huelightsalarm.interfaces.HueLightsListProvider;
 import app.com.huelightsalarm.interfaces.LightsModifier;
 import app.com.huelightsalarm.models.HueControlModel;
+import app.com.huelightsalarm.models.data.AlarmModel;
 import app.com.huelightsalarm.models.data.Light;
 
 public class HueControlViewModel implements HueLightsListProvider, DataSetChanged, HueControl {
@@ -66,5 +67,10 @@ public class HueControlViewModel implements HueLightsListProvider, DataSetChange
             else
                 listener.notifyDataSetChanged();
         }
+    }
+
+    @Override
+    public void setSchedule(AlarmModel alarmModel) {
+        hueControlModel.getAPIHandler().setSchedule(alarmModel);
     }
 }
