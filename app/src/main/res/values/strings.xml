@@ -14,4 +14,6 @@
     <string name="sun">Sun</string>
     <string name="placeholder">Placeholder</string>
     <string name="select">select</string>
+    <string name="confirm">confirm</string>
+    <string name="cancel">cancel</string>
 </resources>

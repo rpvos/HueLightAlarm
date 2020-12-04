@@ -2,6 +2,7 @@ package app.com.huelightsalarm.views.holders;
 
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.Switch;
 import android.widget.TextView;
 
@@ -17,12 +18,12 @@ public class AlarmCardHolder extends RecyclerView.ViewHolder {
 
     private final TextView clockTextView;
     private final Switch alarmSwitch;
-    //TODO week buttons
     private final List<Button> buttons ;
+    private final ImageView trashImage;
 
     public AlarmCardHolder(@NonNull View itemView) {
         super(itemView);
-
+        this.trashImage = itemView.findViewById(R.id.ImageView_TrashButton);
         this.clockTextView = itemView.findViewById(R.id.DigitalClock_AlarmClock);
         this.alarmSwitch = itemView.findViewById(R.id.Switch_CardSwitch);
         this.buttons= new ArrayList<>();
@@ -39,6 +40,14 @@ public class AlarmCardHolder extends RecyclerView.ViewHolder {
             button.setTextColor(itemView.getResources().getColor(R.color.white));
         }
 
+    }
+
+    public List<Button> getButtons() {
+        return buttons;
+    }
+
+    public ImageView getTrashImage() {
+        return trashImage;
     }
 
     public Switch getAlarmSwitch() {

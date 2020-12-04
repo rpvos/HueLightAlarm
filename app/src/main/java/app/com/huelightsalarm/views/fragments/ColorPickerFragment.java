@@ -13,6 +13,8 @@ import androidx.fragment.app.DialogFragment;
 
 import com.skydoves.colorpickerview.ColorEnvelope;
 import com.skydoves.colorpickerview.ColorPickerView;
+import com.skydoves.colorpickerview.flag.BubbleFlag;
+import com.skydoves.colorpickerview.flag.FlagMode;
 
 import app.com.huelightsalarm.R;
 import app.com.huelightsalarm.interfaces.OnResult;
@@ -31,6 +33,7 @@ public class ColorPickerFragment extends DialogFragment implements View.OnClickL
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setStyle(DialogFragment.STYLE_NO_FRAME, R.style.TimePickerTheme);
     }
 
     @Override
@@ -38,6 +41,10 @@ public class ColorPickerFragment extends DialogFragment implements View.OnClickL
         super.onViewCreated(view, savedInstanceState);
         Button selected = view.findViewById(R.id.Button_SelectColor);
         this.colorPickerView = view.findViewById(R.id.ColorPicker_HueLights);
+        BubbleFlag bubbleFlag = new BubbleFlag(this.getContext());
+        bubbleFlag.setFlagMode(FlagMode.FADE);
+        colorPickerView.setFlagView(bubbleFlag);
+
         selected.setOnClickListener(this);
     }
 

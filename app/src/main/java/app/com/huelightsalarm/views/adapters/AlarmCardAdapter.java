@@ -10,10 +10,11 @@ import androidx.recyclerview.widget.RecyclerView;
 import app.com.huelightsalarm.interfaces.AlarmListProvider;
 import app.com.huelightsalarm.interfaces.DataSetChanged;
 import app.com.huelightsalarm.R;
+import app.com.huelightsalarm.interfaces.OnSelfRemove;
 import app.com.huelightsalarm.viewmodels.AlarmViewModel;
 import app.com.huelightsalarm.views.holders.AlarmCardHolder;
 
-public class AlarmCardAdapter extends RecyclerView.Adapter<AlarmCardHolder> implements DataSetChanged {
+public class AlarmCardAdapter extends RecyclerView.Adapter<AlarmCardHolder> implements DataSetChanged, OnSelfRemove {
 
     private final AlarmListProvider listProvider;
 
@@ -32,8 +33,15 @@ public class AlarmCardAdapter extends RecyclerView.Adapter<AlarmCardHolder> impl
 
     @Override
     public void onBindViewHolder(@NonNull AlarmCardHolder holder, int position) {
-        AlarmViewModel model = this.listProvider.getAlarmViewModelList().get(position);
-        model.fillCardHolder(holder);
+        AlarmViewModel viewModel = this.listProvider.getAlarmViewModelList().get(position);
+        viewModel.fillCardHolder(holder);
+        viewModel.setOnSelfRemove(this);
+    }
+
+    @Override
+    public void OnSelfRemove(int position) {
+        this.listProvider.getAlarmViewModelList().remove(position);
+        this.notifyDataSetChanged();
     }
 
     @Override

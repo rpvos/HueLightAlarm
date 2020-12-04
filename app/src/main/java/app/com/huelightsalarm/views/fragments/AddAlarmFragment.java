@@ -43,6 +43,7 @@ public class AddAlarmFragment extends DialogFragment {
         button.setOnClickListener((view1 -> addAlarm()));
 
         this.timePicker = view.findViewById(R.id.TimePicker_AddAlarmTimePicker);
+        this.timePicker.setIs24HourView(true);
     }
 
     private void addAlarm() {
