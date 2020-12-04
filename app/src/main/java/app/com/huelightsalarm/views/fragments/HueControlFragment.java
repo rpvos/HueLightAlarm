@@ -86,8 +86,8 @@ public class HueControlFragment extends Fragment implements View.OnClickListener
     }
 
     @Override
-    public void onResult(String group, String name, String id) {
-        //todo
+    public void onResult(String name, String id) {
+        this.hueControlViewModel.setName(name,id);
     }
 
     /**

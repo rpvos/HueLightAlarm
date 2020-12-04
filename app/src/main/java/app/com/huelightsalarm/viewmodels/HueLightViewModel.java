@@ -9,6 +9,9 @@ import androidx.annotation.NonNull;
 
 import com.google.android.material.slider.Slider;
 
+import java.util.List;
+
+import app.com.huelightsalarm.interfaces.DataSetChanged;
 import app.com.huelightsalarm.interfaces.LightsModifier;
 import app.com.huelightsalarm.models.data.Light;
 import app.com.huelightsalarm.utils.ColorCalculator;
@@ -18,12 +21,15 @@ public class HueLightViewModel implements View.OnClickListener, Slider.OnSliderT
     private Light light;
     private LightsModifier lightsModifier;
     private float lastValue;
+    private DataSetChanged listener;
 
     public HueLightViewModel(Light light) {
         this.light = light;
     }
 
     public void fillCardHolder(HueLightCardHolder holder, LightsModifier lightsModifier) {
+        holder.getSettings().setTag(light.getId());
+
         holder.getHueLightSwitch().setChecked(light.isOn());
 
         holder.getHueLightSwitch().setOnClickListener(this);
@@ -73,4 +79,20 @@ public class HueLightViewModel implements View.OnClickListener, Slider.OnSliderT
         }
     }
 
+    @Override
+    public String toString() {
+        return light.getName();
+    }
+
+    public String getID() {
+        return light.getId();
+    }
+
+    public DataSetChanged getListener() {
+        return listener;
+    }
+
+    public void setListener(DataSetChanged listener) {
+        this.listener = listener;
+    }
 }

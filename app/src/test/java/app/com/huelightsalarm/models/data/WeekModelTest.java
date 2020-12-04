@@ -99,7 +99,7 @@ public class WeekModelTest {
     @Test
     public void getByte() {
         weekModel.turnAllOff();
-        assert (weekModel.getByte().equals("0"));
+        assert (weekModel.getByte().equals("000"));
         weekModel.turnAllOn();
         assert(weekModel.getByte().equals("127"));
     }

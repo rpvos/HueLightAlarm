@@ -3,13 +3,13 @@ package app.com.huelightsalarm.viewmodels;
 import androidx.lifecycle.ViewModel;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import app.com.huelightsalarm.interfaces.AlarmListProvider;
 import app.com.huelightsalarm.interfaces.DataSetChanged;
 import app.com.huelightsalarm.interfaces.Database;
 import app.com.huelightsalarm.interfaces.HueControl;
 import app.com.huelightsalarm.interfaces.OnListChange;
-import app.com.huelightsalarm.models.ListDatabase;
 import app.com.huelightsalarm.models.data.AlarmModel;
 import app.com.huelightsalarm.interfaces.OnAddingAlarm;
 import app.com.huelightsalarm.models.data.TimeModel;
@@ -92,5 +92,15 @@ public class AlarmListViewModel extends ViewModel implements AlarmListProvider, 
     @Override
     public OnListChange onSelfRemove() {
         return this;
+    }
+
+    @Override
+    public List<HueLightViewModel> getLights() {
+        return hueControl.getLights();
+    }
+
+    @Override
+    public void addHueLightsListSubscriber(DataSetChanged subscriber) {
+        hueControl.addListener(subscriber);
     }
 }

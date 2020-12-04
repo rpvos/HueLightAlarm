@@ -2,6 +2,7 @@ package app.com.huelightsalarm.viewmodels;
 
 import android.annotation.SuppressLint;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Switch;
@@ -41,6 +42,18 @@ public class AlarmViewModel implements View.OnClickListener {
         } else {
             holder.getClockTextView().setText(alarmModel.getAlarmTime().getHour() + ":" + "0" + alarmModel.getAlarmTime().getMinutes());
         }
+
+        holder.getSpinner().setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                alarmModel.setSelectedLamp(((HueLightViewModel)adapterView.getSelectedItem()).getID());
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
     }
 
     @Override

@@ -11,4 +11,8 @@ public interface LightsModifier {
     void setBrightness(String id, int brightness);
 
     void setSchedule(AlarmModel alarmModel);
+
+    void setLightName(String name, String id);
+
+    void setGroup(String group, String id);
 }

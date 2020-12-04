@@ -3,6 +3,7 @@ package app.com.huelightsalarm.viewmodels;
 import android.os.Handler;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import app.com.huelightsalarm.interfaces.DataSetChanged;
 import app.com.huelightsalarm.interfaces.HueControl;
@@ -72,5 +73,18 @@ public class HueControlViewModel implements HueLightsListProvider, DataSetChange
     @Override
     public void setSchedule(AlarmModel alarmModel) {
         hueControlModel.getAPIHandler().setSchedule(alarmModel);
+    }
+
+    @Override
+    public List<HueLightViewModel> getLights() {
+        return getHueLightViewModelList();
+    }
+
+    public void setName(String name, String id) {
+        hueControlModel.getAPIHandler().setLightName(name,id);
+    }
+
+    public void setGroup(String group, String id) {
+        hueControlModel.getAPIHandler().setGroup(group,id);
     }
 }

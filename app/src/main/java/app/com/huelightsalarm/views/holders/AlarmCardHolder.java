@@ -3,6 +3,7 @@ package app.com.huelightsalarm.views.holders;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.Switch;
 import android.widget.TextView;
 
@@ -20,12 +21,15 @@ public class AlarmCardHolder extends RecyclerView.ViewHolder {
     private final Switch alarmSwitch;
     private final List<Button> buttons ;
     private final ImageView trashImage;
+    private final Spinner spinner;
 
     public AlarmCardHolder(@NonNull View itemView) {
         super(itemView);
         this.trashImage = itemView.findViewById(R.id.ImageView_TrashButton);
         this.clockTextView = itemView.findViewById(R.id.DigitalClock_AlarmClock);
         this.alarmSwitch = itemView.findViewById(R.id.Switch_CardSwitch);
+        this.spinner = itemView.findViewById(R.id.Spinner_Alarm);
+
         this.buttons= new ArrayList<>();
         this.buttons.add(itemView.findViewById(R.id.Button_Monday));
         this.buttons.add(itemView.findViewById(R.id.Button_Tuesday));
@@ -41,6 +45,8 @@ public class AlarmCardHolder extends RecyclerView.ViewHolder {
         }
 
     }
+
+    public Spinner getSpinner() { return spinner; }
 
     public List<Button> getButtons() {
         return buttons;

@@ -5,6 +5,7 @@ public class AlarmModel {
     private TimeModel alarmTime;
     private WeekModel weekModel;
     private boolean activated;
+    private String selectedLightID;
 
     public AlarmModel(TimeModel alarmTime, boolean activated, WeekModel weekModel) {
         this.alarmTime = alarmTime;
@@ -26,5 +27,13 @@ public class AlarmModel {
 
     public boolean isActivated() {
         return activated;
+    }
+
+    public void setSelectedLamp(String selectedLampID) {
+        this.selectedLightID = selectedLampID;
+    }
+
+    public String getSelectedLight() {
+        return selectedLightID;
     }
 }
