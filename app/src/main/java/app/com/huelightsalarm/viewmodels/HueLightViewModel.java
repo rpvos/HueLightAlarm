@@ -5,21 +5,18 @@ import android.view.View;
 import android.widget.Switch;
 
 import androidx.annotation.NonNull;
-import androidx.cardview.widget.CardView;
-import androidx.fragment.app.DialogFragment;
-import androidx.fragment.app.FragmentManager;
 
 import com.google.android.material.slider.Slider;
 
 import app.com.huelightsalarm.interfaces.LightsModifier;
 import app.com.huelightsalarm.models.data.Light;
 import app.com.huelightsalarm.utils.ColorCalculator;
-import app.com.huelightsalarm.views.fragments.ColorPickerFragment;
 import app.com.huelightsalarm.views.holders.HueLightCardHolder;
 
-public class HueLightViewModel implements View.OnClickListener {
+public class HueLightViewModel implements View.OnClickListener, Slider.OnSliderTouchListener {
     private Light light;
     private LightsModifier lightsModifier;
+    private float lastValue;
 
     public HueLightViewModel(Light light) {
         this.light = light;
@@ -36,24 +33,22 @@ public class HueLightViewModel implements View.OnClickListener {
 
         holder.getCardView().setTag(light.getId());
 
-            holder.getSlider().setValue(light.getPercentageBrightness());
+        Slider slider = holder.getSlider();
 
+        slider.setValue(light.getPercentageBrightness());
 
-        holder.getSlider().addOnSliderTouchListener(new Slider.OnSliderTouchListener() {
-            @Override
-            public void onStartTrackingTouch(@NonNull Slider slider) {
-
-                }
-
-            @Override
-            public void onStopTrackingTouch(@NonNull Slider slider) {
-                float sliderValue = slider.getValue();
-                int value = ColorCalculator.map(0, 1, 0, 254, sliderValue);
-                lightsModifier.setBrightness(light.getId(), value);
-            }
-        });
+        slider.clearOnSliderTouchListeners();
+        slider.addOnSliderTouchListener(this);
 
         this.lightsModifier = lightsModifier;
+    }
+
+    public float getLastValue() {
+        return lastValue;
+    }
+
+    public void setLastValue(float lastValue) {
+        this.lastValue = lastValue;
     }
 
     @Override
@@ -62,4 +57,20 @@ public class HueLightViewModel implements View.OnClickListener {
             lightsModifier.setLightState(light.getId(), ((Switch) view).isChecked());
         }
     }
+
+    @Override
+    public void onStartTrackingTouch(@NonNull Slider slider) {
+    }
+
+    @Override
+    public void onStopTrackingTouch(@NonNull Slider slider) {
+        float sliderValue = slider.getValue();
+        if (getLastValue() != sliderValue) {
+            setLastValue(slider.getValue());
+            int value = ColorCalculator.map(0, 1, 0, 254, sliderValue);
+            lightsModifier.setBrightness(light.getId(), value);
+
+        }
+    }
+
 }

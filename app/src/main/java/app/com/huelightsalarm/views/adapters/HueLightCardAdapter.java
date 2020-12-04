@@ -35,7 +35,7 @@ public class HueLightCardAdapter extends RecyclerView.Adapter<HueLightCardHolder
     @Override
     public void onBindViewHolder(@NonNull HueLightCardHolder holder, int position) {
         HueLightViewModel model = this.listProvider.getHueLightViewModelList().get(position);
-        model.fillCardHolder(holder,listProvider.getLightsModifier());
+        model.fillCardHolder(holder, listProvider.getLightsModifier());
         holder.subscribeToOnClick(onClickListener);
     }
 
